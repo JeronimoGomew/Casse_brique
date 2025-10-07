@@ -7,7 +7,7 @@ import tkinter as tk
 
 
 class balle:
-    def __init__(self,canvas,x,y,rayon,vitesse,fenetre,couleur):
+    def __init__(self,canvas,x,y,rayon,vitesse,fenetre,couleur,angle):
 
         
         self.__fenetre=fenetre
@@ -17,7 +17,7 @@ class balle:
         self.__y=y
         self.__rayon=rayon
 
-        self.__angle=random.uniform(0,2*math.pi)
+        self.__angle=angle
         self.__vitesse=vitesse
         
         self.__dx=self.__vitesse*math.cos(self.__angle)
@@ -30,11 +30,11 @@ class balle:
     
     
     def mouvement(self):
-        if  self.__x+self.__dx+self.__rayon > self.__largeur:
+        if  self.__x+self.__dx+self.__rayon > 1000:
             self.__dx=-self.__dx
         if self.__x -self.__rayon +self.__dx <0:
             self.__dx=-self.__dx
-        if self.__y+self.__dy+self.__rayon > self.__hauteur:
+        if self.__y+self.__dy+self.__rayon > 500:
             self.__dy=-self.__dy
         if self.__y -self.__rayon +self.__dy <0:
             self.__dy=-self.__dy
