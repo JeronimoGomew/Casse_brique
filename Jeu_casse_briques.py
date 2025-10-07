@@ -4,11 +4,10 @@
 -------------------------------------------------------
 Casse-Brique - Interface graphique seule
 Auteurs : Jeronimo Gomez, Daoud Hechaichi
-Date : 07/10/2023
+Date : 07/10/2025
 -------------------------------------------------------
 
--------------------------------------------------------
-À propos du Canvas
+
 -------------------------------------------------------
 Le Canvas est la scène principale de notre jeu.
 C’est là que se passe toute l’action : la balle, la raquette, les briques...
@@ -67,33 +66,16 @@ class CasseBriqueApp:
                                   relief=tk.FLAT)
         self.btn_quit.pack(side="left", padx=10)
 
-    """
-    -------------------------------------------------------
-    Fonction : demarrer_partie
-    -------------------------------------------------------
-    Cette fonction gère le lancement d’une nouvelle partie.
+"""
+-------------------------------------------------------
+Fonction : demarrer_partie
+-------------------------------------------------------
+Cette fonction gère le lancement d’une nouvelle partie.
 
-    Étape 1 :
-        Elle efface entièrement le canevas pour supprimer
-        tout élément graphique précédemment affiché (briques,
-        balle, raquette…).
-
-    Étape 2 :
-        À cet endroit, seront ajoutées plus tard les actions de
-        réinitialisation du score, du nombre de vies et des éléments
-        visuels du jeu.
-
-    Étape 3 :
-        Lorsque la logique du jeu sera complète, cette fonction
-        deviendra le point de départ pour initialiser la boucle
-        principale (mouvements, collisions, etc.).
-
-    En résumé :
-        Cette méthode remet le canevas à zéro à chaque démarrage
-        afin de garantir un état propre avant le lancement d’une
-        nouvelle partie.
-    -------------------------------------------------------
-    """
+    Elle efface entièrement le canevas pour supprimer
+    tout élément graphique précédemment affiché 
+-------------------------------------------------------
+"""
     def demarrer_partie(self):
         self.canvas.delete("all")
 
