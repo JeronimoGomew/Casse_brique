@@ -14,4 +14,4 @@ canvas = tk.Canvas(fenetre, width=500, height=400, bg="black")
 canvas.pack()
 
 button_quitter = tk.Button(fenetre,text="quitter", command=fenetre.destroy)
-
+bonjour 
