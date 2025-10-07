@@ -1,7 +1,7 @@
 import tkinter as tk
 MaFenetre = tk.Tk()
 MaFenetre.title ("Jeu du casse-briques")
-MaFenetre.geometry("6000x5000")
+MaFenetre.geometry("1000x600")
 MaFenetre.config(bg="gray20")
 
 
@@ -30,6 +30,5 @@ Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie")
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 
-if __name__ == "__main__":
-    MaFenetre.mainloop()
+MaFenetre.mainloop()
 
