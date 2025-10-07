@@ -1,9 +1,27 @@
 
-# -------------------------------------------------------
-# Casse-Brique - Interface graphique seule
-# Auteurs : Jeronimo Gomez, Daoud Hechaichi
-# Date : 07/10/2023
-# -------------------------------------------------------
+
+"""
+-------------------------------------------------------
+Casse-Brique - Interface graphique seule
+Auteurs : Jeronimo Gomez, Daoud Hechaichi
+Date : 07/10/2025
+-------------------------------------------------------
+
+
+-------------------------------------------------------
+Le Canvas est la scène principale de notre jeu.
+C’est là que se passe toute l’action : la balle, la raquette, les briques...
+
+Dans notre jeu du casse-brique, on lui donne :
+  • un fond sombre ("gray12") pour offrir un aspect moins agressif pour les yeux,
+  • un contour blanc pour délimiter clairement la zone de jeu,
+  • une taille fixe (560x360) pour garder une mise en page propre.
+
+Le Canvas est entouré de deux frames principales :
+  • une première en haut pour afficher le score et les vies restantes,
+  • une deuxième en bas pour les boutons de contrôle (Démarrer, Quitter).
+-------------------------------------------------------
+"""
 
 import tkinter as tk
 
@@ -12,66 +30,55 @@ class CasseBriqueApp:
         self.root = root
         self.root.title("Casse-Briques")
         self.root.geometry("600x500")
-        self.root.config(bg="gray15")
+        self.root.config(bg="gray20")
 
-        # --- Menu ---
-        menubar = tk.Menu(self.root)
-        menu_fichier = tk.Menu(menubar, tearoff=0)
-        menu_fichier.add_command(label="Nouvelle partie", command=self.nouvelle_partie)
-        menu_fichier.add_separator()
-        menu_fichier.add_command(label="Quitter", command=self.root.quit)
-        menubar.add_cascade(label="Fichier", menu=menu_fichier)
-        self.root.config(menu=menubar)
+        frame_infos = tk.Frame(self.root, bg="gray20")
+        frame_infos.pack(pady=10)
 
-        # --- Score et Infos ---
-        frame_top = tk.Frame(self.root, bg="gray15")
-        frame_top.pack(pady=10)
+        self.btn_score = tk.Button(frame_infos, text="Score : 0", font=("Arial", 14),
+                                   state=tk.DISABLED, disabledforeground="white",
+                                   bg="gray35", activebackground="gray35", relief=tk.FLAT)
+        self.btn_score.pack(side="left", padx=10)
 
-        self.label_score = tk.Label(frame_top, text="Score : 0", fg="white", bg="gray15", font=("Arial", 14))
-        self.label_score.pack(side="left", padx=10)
+        self.btn_vies = tk.Button(frame_infos, text="Vies : 3", font=("Arial", 14),
+                                  state=tk.DISABLED, disabledforeground="white",
+                                  bg="gray35", activebackground="gray35", relief=tk.FLAT)
+        self.btn_vies.pack(side="left", padx=10)
 
-        self.label_vies = tk.Label(frame_top, text="Vies : 3", fg="white", bg="gray15", font=("Arial", 14))
-        self.label_vies.pack(side="right", padx=10)
+        self.canvas = tk.Canvas(self.root, width=560, height=360, bg="gray12",
+                                highlightthickness=2, highlightbackground="white")
+        self.canvas.pack(padx=20, pady=10)
 
-        # --- Canevas principal ---
-        self.canvas = tk.Canvas(self.root, width=600, height=400, bg="black", highlightthickness=2, highlightbackground="white")
-        self.canvas.pack()
+        frame_commandes = tk.Frame(self.root, bg="gray20")
+        frame_commandes.pack(pady=10)
 
-        # --- Boutons ---
-        frame_bottom = tk.Frame(self.root, bg="gray15")
-        frame_bottom.pack(pady=10)
-
-        self.btn_start = tk.Button(frame_bottom, text="Démarrer", command=self.nouvelle_partie, font=("Arial", 12))
+        self.btn_start = tk.Button(frame_commandes, text="Démarrer", font=("Arial", 12),
+                                command=self.demarrer_partie,
+                                bg="gray35", fg="black",
+                                activebackground="gray40", activeforeground="black",
+                                relief=tk.FLAT)
         self.btn_start.pack(side="left", padx=10)
 
-        self.btn_quit = tk.Button(frame_bottom, text="Quitter", command=self.root.quit, font=("Arial", 12))
+        self.btn_quit = tk.Button(frame_commandes, text="Quitter", font=("Arial", 12),
+                                  command=self.root.destroy,
+                                  bg="gray35", fg="black",
+                                  activebackground="gray40", activeforeground="black",
+                                  relief=tk.FLAT)
         self.btn_quit.pack(side="left", padx=10)
 
-        # --- Éléments graphiques statiques ---
-        self.creer_elements_visuels()
+"""
+-------------------------------------------------------
+Fonction : demarrer_partie
+-------------------------------------------------------
+Cette fonction gère le lancement d’une nouvelle partie.
 
-    def creer_elements_visuels(self):
-        # Dessiner raquette
-        self.raquette = self.canvas.create_rectangle(250, 370, 350, 380, fill="white")
-
-        # Dessiner balle
-        self.balle = self.canvas.create_oval(290, 350, 310, 370, fill="red")
-
-        # Dessiner quelques briques en haut
-        couleurs = ["red", "orange", "yellow", "green", "blue"]
-        for i in range(5):
-            for j in range(8):
-                x1 = 10 + j * 70
-                y1 = 10 + i * 25
-                x2 = x1 + 60
-                y2 = y1 + 20
-                self.canvas.create_rectangle(x1, y1, x2, y2, fill=couleurs[i], width=0)
-
-    def nouvelle_partie(self):
+    Elle efface entièrement le canevas pour supprimer
+    tout élément graphique précédemment affiché 
+-------------------------------------------------------
+"""
+    def demarrer_partie(self):
         self.canvas.delete("all")
-        self.creer_elements_visuels()
-        self.label_score.config(text="Score : 0")
-        self.label_vies.config(text="Vies : 3")
+
 
 
 if __name__ == "__main__":
