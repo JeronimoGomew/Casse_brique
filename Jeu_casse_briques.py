@@ -18,4 +18,4 @@ button_quitter = tk.Button(fenetre,text="quitter", command=fenetre.destroy)
 
 def quitter():
     button_quitter.pack()
-    
+    fenetre.after(3000, button_quitter.pack_forget)
