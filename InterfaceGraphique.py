@@ -1,9 +1,11 @@
 import tkinter as tk
+import classes_balle as balle
+
+
 MaFenetre = tk.Tk()
 MaFenetre.title ("Jeu du casse-briques")
 MaFenetre.geometry("1000x600")
 MaFenetre.config(bg="gray20")
-
 
 
 FrameTop = tk.Frame(MaFenetre, bg="gray15", height=50)
@@ -29,6 +31,8 @@ Boutton_Quitter.pack(side="right", pady=10, padx=10)
 Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie")
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
+
+balle1=balle.balle(Canvas,500,300,10,5,MaFenetre,"red")
 
 MaFenetre.mainloop()
 
