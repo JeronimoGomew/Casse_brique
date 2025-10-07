@@ -16,3 +16,6 @@ canvas.pack()
 
 button_quitter = tk.Button(fenetre,text="quitter", command=fenetre.destroy)
 
+def quitter():
+    button_quitter.pack()
+    
