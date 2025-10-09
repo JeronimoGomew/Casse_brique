@@ -25,9 +25,11 @@ class balle:
 
         self.__couleur=couleur
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
-        self.__largeur=self.__canvas.winfo_width()
-        self.__hauteur=self.__canvas.winfo_height()
-    
+
+    def getx(self):
+        return self.__x
+    def gety(self):
+        return self.__y
     
     def mouvement(self):
         if  self.__x+self.__dx+self.__rayon > 1000:

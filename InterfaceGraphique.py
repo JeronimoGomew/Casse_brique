@@ -1,41 +1,67 @@
 import tkinter as tk
 import classes_balle as b
+import Brique as br
+
+# fonction pour centrer la fenetre dans l'ecran
+# Entrées: fenetre, longueur de la fenetre(enntier), largeur de la fenetre(entier)
+# Sorties: chaine de caracteres avec la geometrie de la fenetre, a inserer dans fenetre.geometry()
+
+def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
+    
+    longueur_ecran= fenetre.winfo_screenwidth() #recupere la largeur de l'ecran
+    largeur_ecran= fenetre.winfo_screenheight() #recupere la hauteur de l'ecran
+
+    x= (longueur_ecran - longueur_fenetre)//2 #calcule la position x pour centrer la fenetre en longueur
+    y= (largeur_ecran - largeur_fenetre)//2   #calcule la position y pour centrer la fenetre en largeur
+    
+    return f"{longueur_fenetre}x{largeur_fenetre}+{x}+{y}"
 
 
+# Programme principal
+# Initialisation de la fenetre principale, titre, dimensions et couleur de fond 
 MaFenetre = tk.Tk()
 MaFenetre.title ("Jeu du casse-briques")
-MaFenetre.geometry("1000x600")
+MaFenetre.geometry(centrer_fenetre(MaFenetre,1000,600))
 MaFenetre.config(bg="gray20")
 
 
+# Frame du haut pour le score et les vies
 FrameTop = tk.Frame(MaFenetre, bg="gray15", height=50)
 FrameTop.pack(fill="x")
 
+# Canvas pour le jeu
 Canvas = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
 Canvas.pack()
 
-LabelScore = tk.Label(FrameTop, text="Score : 0", fg="white", bg="gray15", font=("Arial", 14, "bold"))
+# Label pour le score 
+Score=tk.StringVar()
+LabelScore = tk.Label(FrameTop, textvariable=Score, fg="white", bg="gray15", font=("Arial", 14, "bold"))
 LabelScore.pack(side="left", padx=20, pady=10)
 
-LabelVies = tk.Label(FrameTop, text="Vies : 3", fg="white", bg="gray15", font=("Arial", 14, "bold"))
+# Label pour les vies
+Vies=tk.StringVar()
+LabelVies = tk.Label(FrameTop, textvariable=Vies, fg="white", bg="gray15", font=("Arial", 14, "bold"))
 LabelVies.pack(side='right', padx=20, pady=10)
 
-
+# Bouton quitter et demarrer une nouvelle partie
 FrameBottom = tk.Frame(MaFenetre, bg="gray15", height=40)
 FrameBottom.pack(side="bottom", fill="x")
 
 Boutton_Quitter = tk.Button(FrameBottom, text="Quitter",command = MaFenetre.destroy)
 Boutton_Quitter.pack(side="right", pady=10, padx=10)
 
-
-
-
 Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie")
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
-
+#Balle 
 balle1=b.balle(Canvas,100,200,10,5,MaFenetre,"red",10)
 balle1.mouvement()
+
+print(b.getx(balle1))
+print(b.gety(balle1))
+
+#Brique
+brique_test = br.Brique(Canvas, 100, 100, 120, 40, "red")
 
 
 MaFenetre.mainloop()
