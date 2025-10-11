@@ -17,6 +17,23 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
     return f"{longueur_fenetre}x{largeur_fenetre}+{x}+{y}"
 
 
+# fonction pour demarrer une nouvelle partie
+# Entrées: aucune
+# Sorties: aucune
+# elle se declenche quand on appuie sur le bouton demarrer une nouvelle partie
+def demarrer():
+    global vitesse
+    vitesse=5
+    balle1=b.balle(Zone_jeu,10,400,10,vitesse,MaFenetre,"red",10)
+    brique_test = br.Brique(Zone_jeu, 800, 200, 120, 40, "blue")
+    balle1.mouvement(brique_test)
+    #balleinit.detruire()
+
+
+
+    
+
+
 # Programme principal
 # Initialisation de la fenetre principale, titre, dimensions et couleur de fond 
 MaFenetre = tk.Tk()
@@ -30,8 +47,8 @@ FrameTop = tk.Frame(MaFenetre, bg="gray15", height=50)
 FrameTop.pack(fill="x")
 
 # Canvas pour le jeu
-Canvas = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
-Canvas.pack()
+Zone_jeu = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
+Zone_jeu.pack()
 
 # Label pour le score 
 Score=tk.StringVar()
@@ -50,18 +67,19 @@ FrameBottom.pack(side="bottom", fill="x")
 Boutton_Quitter = tk.Button(FrameBottom, text="Quitter",command = MaFenetre.destroy)
 Boutton_Quitter.pack(side="right", pady=10, padx=10)
 
-Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie")
+Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",command=demarrer)
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 #Balle 
-balle1=b.balle(Canvas,100,200,10,5,MaFenetre,"red",10)
-balle1.mouvement()
+balleinit=b.balle(Zone_jeu,800,190,10,0,MaFenetre,"blue",10)
+balle2=b.balle(Zone_jeu,300,150,10,0,MaFenetre,"red",10)
 
-print(b.getx(balle1))
-print(b.gety(balle1))
+
+
+    
 
 #Brique
-brique_test = br.Brique(Canvas, 100, 100, 120, 40, "red")
+#brique_test = br.Brique(Zone_jeu, 300, 100, 120, 40, "blue")
 
 
 MaFenetre.mainloop()
