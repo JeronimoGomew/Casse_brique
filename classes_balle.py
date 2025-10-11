@@ -31,6 +31,11 @@ class balle:
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
 
 
+    def changer_vitesse(self,nouvelle_vitesse):
+        self.__dx = nouvelle_vitesse*math.cos(self.__angle)
+        self.__dy = nouvelle_vitesse*math.sin(self.__angle)
+
+        
     def detruire(self):
         self.__canvas.delete(self.__boullee)
     
