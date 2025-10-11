@@ -5,23 +5,26 @@ import math as mt
 
 class Brique:
     def __init__(self , canvas, x, y, largeur, hauteur, couleur):
-        self._canvas = canvas
-        self._x = x
-        self._y = y
-        self._largeur = largeur
-        self._hauteur = hauteur
-        self._couleur = couleur 
+        self.__canvas = canvas
+        self.__x = x
+        self.__y = y
+        self.__largeur = largeur
+        self.__hauteur = hauteur
+        self.__couleur = couleur 
         
-        self._brique = self._canvas.create_rectangle(x, y, x + largeur, y + hauteur, fill=couleur)
+        self.__brique = self.__canvas.create_rectangle(x, y, x + largeur, y + hauteur, fill=couleur)
 
     def getx(self):
-        return self._x
+        return self.__x
     def gety(self):
-        return self._y
+        return self.__y
     def getlargeur(self):
-        return self._largeur    
+        return self.__largeur    
     def gethauteur(self):
-        return self._hauteur
+        return self.__hauteur
+    
+    def detruire (self):
+        self.__canvas.delete(self.__brique) 
         
 
 

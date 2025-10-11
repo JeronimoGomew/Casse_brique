@@ -30,15 +30,11 @@ def demarrer():
     #balleinit.detruire()
 
 
-
-    
-
-
 # Programme principal
 # Initialisation de la fenetre principale, titre, dimensions et couleur de fond 
 MaFenetre = tk.Tk()
-MaFenetre.title ("Jeu du casse-briques")
-MaFenetre.geometry(centrer_fenetre(MaFenetre,1000,600))
+MaFenetre.title("Jeu du casse-briques")
+MaFenetre.geometry(centrer_fenetre(MaFenetre, 1000, 600))
 MaFenetre.config(bg="gray20")
 
 
@@ -60,26 +56,24 @@ Vies=tk.StringVar()
 LabelVies = tk.Label(FrameTop, textvariable=Vies, fg="white", bg="gray15", font=("Arial", 14, "bold"))
 LabelVies.pack(side='right', padx=20, pady=10)
 
-# Bouton quitter et demarrer une nouvelle partie
+# Frame du bas pour les boutons
 FrameBottom = tk.Frame(MaFenetre, bg="gray15", height=40)
 FrameBottom.pack(side="bottom", fill="x")
 
+# Boutons quitter et demarrer une nouvelle partie
 Boutton_Quitter = tk.Button(FrameBottom, text="Quitter",command = MaFenetre.destroy)
 Boutton_Quitter.pack(side="right", pady=10, padx=10)
 
+# Bouton pour demarrer une nouvelle partie
 Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",command=demarrer)
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
-#Balle 
+#Balle de test
 balleinit=b.balle(Zone_jeu,800,190,10,0,MaFenetre,"blue",10)
-balle2=b.balle(Zone_jeu,300,150,10,0,MaFenetre,"red",10)
 
 
 
-    
 
-#Brique
-#brique_test = br.Brique(Zone_jeu, 300, 100, 120, 40, "blue")
 
 
 MaFenetre.mainloop()
