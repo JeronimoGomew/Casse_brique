@@ -11,6 +11,7 @@ class Brique:
         self.__largeur = largeur
         self.__hauteur = hauteur
         self.__couleur = couleur 
+        self.__vivant = True 
         
         self.__brique = self.__canvas.create_rectangle(x, y, x + largeur, y + hauteur, fill=couleur)
 
@@ -22,9 +23,13 @@ class Brique:
         return self.__largeur    
     def gethauteur(self):
         return self.__hauteur
+    def getvivant(self):
+        return self.__vivant
     
     def detruire (self):
-        self.__canvas.delete(self.__brique) 
+        self.__canvas.delete(self.__brique)
+        self.__vivant = False
+ 
         
 
 
