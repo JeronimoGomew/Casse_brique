@@ -145,22 +145,26 @@ class balle:
 
                  
 
-            #  Mise à jour des composantes de vitesse
+            # Mise à jour des composantes de vitesse
             vitesse = math.sqrt(self.__dx**2 + self.__dy**2)
             self.__dx = vitesse * math.sin(nouvel_angle)
             self.__dy = -abs(vitesse * math.cos(nouvel_angle))  # vers le haut
 
             # Ajuste légèrement la position pour éviter la collision immédiate suivante
             self.__y = y_plateforme - self.__rayon - 1
-
-           
-
-                
-
     
-    
+    def suivre_plateforme(self,plateforme):
+        x_plat = plateforme.getx()
+        y_plat = plateforme.gety()
+        largeur_plat = plateforme.getlargeur()
+        hauteur_plat = plateforme.gethauteur ()
+        
+        X=x_plat + largeur_plat/2 -self.__rayon
+        Y=y_plat - 2*self.__rayon 
 
-    
+        self.__canvas.coords(self.__boullee,X,Y,X+2*self.__rayon,Y+2*self.__rayon)
+        self.__fenetre.after(20,self.suivre_plateforme,plateforme)
+
     
     def mouvement(self,liste_briques,plateforme,vies,score):
 
@@ -172,6 +176,8 @@ class balle:
         if self.__y+self.__dy+self.__rayon > 520:
             self.detruire()
             vies.perdre_vie()
+            
+            return 0
 
         if self.__y -self.__rayon +self.__dy <0:
             self.rebond_vertical()
