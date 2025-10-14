@@ -29,8 +29,8 @@ class Brique:
     def detruire (self):
         self.__canvas.delete(self.__brique)
         self.__vivant = False
- 
-        
+
+       
 
 
 

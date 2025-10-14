@@ -25,18 +25,44 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
 def demarrer():
 
     balle1.changer_vitesse(5)
+    for i in range(9):
+        liste_briques()[i]
     
-    brique_test = br.Brique(Zone_jeu, 10, 10, 120, 40, "blue")
+    brique_test=br.Brique(Zone_jeu,9,60,90,40,"blue")
     balle1.mouvement(brique_test,plateforme)
     
     #balleinit.detruire()
+
+
+def liste_briques():
+    marge = 10
+    liste_br = []
+
+    for j in range (4):
+        for i in range (10):
+            brique=br.Brique(Zone_jeu,9 + i*90 + i*9,10 + 50*j,90,40,"blue")
+            liste_br.append(brique)
+    return liste_br
+       
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Programme principal
 # Initialisation de la fenetre principale, titre, dimensions et couleur de fond 
 MaFenetre = tk.Tk()
 MaFenetre.title("Jeu du casse-briques")
-MaFenetre.geometry(centrer_fenetre(MaFenetre, 1000, 600))
+MaFenetre.geometry(centrer_fenetre(MaFenetre, 1000,600))
 MaFenetre.config(bg="gray20")
 
 
@@ -71,7 +97,6 @@ Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",co
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 # Balle de test
-balleinit=b.balle(Zone_jeu,100,38,10,0,MaFenetre,"blue",0)
 balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",20)
 
 # Plateforme   
