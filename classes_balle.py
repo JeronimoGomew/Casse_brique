@@ -127,7 +127,13 @@ class balle:
         
 
         if x_plateforme -marge <= x_balle <= x_plateforme + largeur_plateforme + marge and y_plateforme -marge <= y_balle+self.__rayon <= y_plateforme + marge:
-                self.rebond_vertical()
+                
+                point_impact= (x_balle - x_plateforme + largeur_plateforme/2) / largeur_plateforme #entre 0 (gauche) et 1 (droite)
+
+                self.__angle = 60 + point_impact*(-10)
+                self.__dx = 
+
+             
 
     
     

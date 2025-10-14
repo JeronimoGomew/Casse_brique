@@ -2,6 +2,7 @@ import tkinter as tk
 import classes_balle as b
 import Brique as br
 import classe_plateforme as pl
+import numpy as np
 
 # fonction pour centrer la fenetre dans l'ecran
 # Entrées: fenetre, longueur de la fenetre(enntier), largeur de la fenetre(entier)
@@ -83,10 +84,10 @@ Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",co
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 # Balle de test
-balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",20)
+balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",50)
 
 # Plateforme   
-plateforme = pl.plateforme(Zone_jeu,MaFenetre,600,450,50,20,"red")
+plateforme = pl.plateforme(Zone_jeu,MaFenetre,600,450,140,20,"red")
 
 
 
