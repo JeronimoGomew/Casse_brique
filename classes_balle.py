@@ -130,8 +130,9 @@ class balle:
                 
                 point_impact= (x_balle - x_plateforme + largeur_plateforme/2) / largeur_plateforme #entre 0 (gauche) et 1 (droite)
 
-                self.__angle = 60 + point_impact*(-10)
-                self.__dx = 
+                self.rebond_vertical()
+                #self.__angle = 60 + point_impact*(-10)
+                #self.__dx = 
 
              
 
