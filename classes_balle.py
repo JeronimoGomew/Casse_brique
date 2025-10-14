@@ -99,20 +99,20 @@ class balle:
             if x_brique - marge<= x_balle <= x_brique + largeur_brique + marge and y_brique+ hauteur_brique -marge <= y_balle - self.__rayon <= y_brique+hauteur_brique + marge :
                 self.rebond_vertical()
                 brique.detruire()
-                score.ajouter_point
+                score.ajouter_point()
                 
 
             #colision par le cote gauche de la boulle et le cote droit de la brique
             if x_brique + largeur_brique - marge <= x_balle - self.__rayon <= x_brique + largeur_brique + marge and y_brique-marge <= y_balle <= y_brique + hauteur_brique+marge:
                 self.rebond_horizontal()
                 brique.detruire()
-                score.ajouter_point
+                score.ajouter_point()
             
             #colision par le cote droite de la boulle et le cote gauche de la brique
             if x_brique - marge <= x_balle + self.__rayon <= x_brique + marge and y_brique -marge <= y_balle <= y_brique + hauteur_brique + marge:
                 self.rebond_horizontal()
                 brique.detruire()
-                score.ajouter_point
+                score.ajouter_point()
 
         else:
             pass
@@ -136,7 +136,7 @@ class balle:
         if x_plateforme -marge <= x_balle <= x_plateforme + largeur_plateforme + marge and y_plateforme -marge <= y_balle+self.__rayon <= y_plateforme + marge:
                 
                 
-             # 🧮 Calcul de la position relative du point d’impact
+             #Calcul du point d’impact
             position_relative = (x_balle - x_plateforme) / largeur_plateforme  # entre 0 (gauche) et 1 (droite)
             position_centrée = (position_relative - 0.5) * 2  # entre -1 (gauche) et +1 (droite)
 
@@ -145,7 +145,7 @@ class balle:
 
                  
 
-            # 🔄 Mise à jour des composantes de vitesse
+            #  Mise à jour des composantes de vitesse
             vitesse = math.sqrt(self.__dx**2 + self.__dy**2)
             self.__dx = vitesse * math.sin(nouvel_angle)
             self.__dy = -abs(vitesse * math.cos(nouvel_angle))  # vers le haut
@@ -171,7 +171,7 @@ class balle:
             self.rebond_horizontal()
         if self.__y+self.__dy+self.__rayon > 520:
             self.detruire()
-            vies.perdre_vie
+            vies.perdre_vie()
 
         if self.__y -self.__rayon +self.__dy <0:
             self.rebond_vertical()

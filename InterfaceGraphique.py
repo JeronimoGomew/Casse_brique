@@ -28,11 +28,10 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
 def demarrer():
 
     balle1.changer_vitesse(5)
-    for i in range(9):
-        liste_briques()[i]
+    
     balle1.mouvement(liste_briques(),plateforme,gestion_vies,gestion_score)
     
-    #balleinit.detruire()
+    
 
 
 def liste_briques():
@@ -62,17 +61,7 @@ FrameTop.pack(fill="x")
 # Canvas pour le jeu
 Zone_jeu = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
 Zone_jeu.pack()
-"""
-# Label pour le score 
-Score=tk.StringVar()
-LabelScore = tk.Label(FrameTop, textvariable=Score, fg="white", bg="gray15", font=("Arial", 14, "bold"))
-LabelScore.pack(side="left", padx=20, pady=10)
 
-# Label pour les vies
-Vies=tk.StringVar()
-LabelVies = tk.Label(FrameTop, textvariable=Vies, fg="white", bg="gray15", font=("Arial", 14, "bold"))
-LabelVies.pack(side='right', padx=20, pady=10)
-"""
 # Gestion du score et des vies (via nos classes)
 gestion_vies = cv.Vies(FrameTop, nb_vies=3)
 gestion_score = cs.Score(FrameTop, nb_points=0)
