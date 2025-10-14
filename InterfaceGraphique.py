@@ -84,7 +84,7 @@ Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",co
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 # Balle de test
-balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",50)
+balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",120)
 
 # Plateforme   
 plateforme = pl.plateforme(Zone_jeu,MaFenetre,600,450,140,20,"red")
