@@ -128,13 +128,27 @@ class balle:
 
         if x_plateforme -marge <= x_balle <= x_plateforme + largeur_plateforme + marge and y_plateforme -marge <= y_balle+self.__rayon <= y_plateforme + marge:
                 
-                point_impact= (x_balle - x_plateforme + largeur_plateforme/2) / largeur_plateforme #entre 0 (gauche) et 1 (droite)
+                
+             # 🧮 Calcul de la position relative du point d’impact
+            position_relative = (x_balle - x_plateforme) / largeur_plateforme  # entre 0 (gauche) et 1 (droite)
+            position_centrée = (position_relative - 0.5) * 2  # entre -1 (gauche) et +1 (droite)
 
-                self.rebond_vertical()
-                #self.__angle = 60 + point_impact*(-10)
-                #self.__dx = 
+            angle_max = math.radians(60)
+            nouvel_angle = position_centrée * angle_max
 
-             
+                 
+
+            # 🔄 Mise à jour des composantes de vitesse
+            vitesse = math.sqrt(self.__dx**2 + self.__dy**2)
+            self.__dx = vitesse * math.sin(nouvel_angle)
+            self.__dy = -abs(vitesse * math.cos(nouvel_angle))  # vers le haut
+
+            # Ajuste légèrement la position pour éviter la collision immédiate suivante
+            self.__y = y_plateforme - self.__rayon - 1
+
+           
+
+                
 
     
     
