@@ -3,6 +3,8 @@ import classes_balle as b
 import Brique as br
 import classe_plateforme as pl
 import numpy as np
+import Classe_vies as cv
+import Classe_scores as cs
 
 # fonction pour centrer la fenetre dans l'ecran
 # Entrées: fenetre, longueur de la fenetre(enntier), largeur de la fenetre(entier)
@@ -60,7 +62,7 @@ FrameTop.pack(fill="x")
 # Canvas pour le jeu
 Zone_jeu = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
 Zone_jeu.pack()
-
+""""
 # Label pour le score 
 Score=tk.StringVar()
 LabelScore = tk.Label(FrameTop, textvariable=Score, fg="white", bg="gray15", font=("Arial", 14, "bold"))
@@ -70,6 +72,11 @@ LabelScore.pack(side="left", padx=20, pady=10)
 Vies=tk.StringVar()
 LabelVies = tk.Label(FrameTop, textvariable=Vies, fg="white", bg="gray15", font=("Arial", 14, "bold"))
 LabelVies.pack(side='right', padx=20, pady=10)
+"""
+# Gestion du score et des vies (via nos classes)
+gestion_vies = cv.Vies(FrameTop, nb_vies=3)
+gestion_score = cs.Score(FrameTop, nb_points=0)
+
 
 # Frame du bas pour les boutons
 FrameBottom = tk.Frame(MaFenetre, bg="gray15", height=40)
