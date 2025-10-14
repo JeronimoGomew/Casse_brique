@@ -133,6 +133,9 @@ class balle:
             position_relative = (x_balle - x_plateforme) / largeur_plateforme  # entre 0 (gauche) et 1 (droite)
             position_centrée = (position_relative - 0.5) * 2  # entre -1 (gauche) et +1 (droite)
 
+            angle_max = math.radians(60)
+            nouvel_angle = position_centrée * angle_max
+
                  
 
             # 🔄 Mise à jour des composantes de vitesse
