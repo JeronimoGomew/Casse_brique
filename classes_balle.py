@@ -133,10 +133,7 @@ class balle:
             position_relative = (x_balle - x_plateforme) / largeur_plateforme  # entre 0 (gauche) et 1 (droite)
             position_centrée = (position_relative - 0.5) * 2  # entre -1 (gauche) et +1 (droite)
 
-            # ⚙️ Définition d’un angle de rebond selon la position d’impact
-            # Exemple : -60° (bord gauche) à +60° (bord droit)
-            angle_max = math.radians(60)
-            nouvel_angle = position_centrée * angle_max
+                 
 
             # 🔄 Mise à jour des composantes de vitesse
             vitesse = math.sqrt(self.__dx**2 + self.__dy**2)
