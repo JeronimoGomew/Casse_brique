@@ -6,6 +6,8 @@ import math
 import tkinter as tk
 import Brique as br 
 import classe_plateforme as pl
+import Classe_vies as cv
+import Classe_scores as cs
 
 
 class balle:
@@ -66,7 +68,7 @@ class balle:
     # but: detecter la colision entre la balle et une brique
     # Entrées: brique (objet de la classe Brique)
     # Sorties: aucune
-    def colision_balle_brique(self, brique):
+    def colision_balle_brique(self, brique,score):
         
         if abs(self.__dx)<=5:
             x_balle = self.__x
@@ -89,23 +91,28 @@ class balle:
             if x_brique -marge <= x_balle <= x_brique + largeur_brique + marge and y_brique -marge <= y_balle+self.__rayon <= y_brique + marge:
                 self.rebond_vertical()
                 brique.detruire()
+                score.ajouter_point
+
                 
 
             #colision par le haut de la boulle et le bas de la brique
             if x_brique - marge<= x_balle <= x_brique + largeur_brique + marge and y_brique+ hauteur_brique -marge <= y_balle - self.__rayon <= y_brique+hauteur_brique + marge :
                 self.rebond_vertical()
                 brique.detruire()
+                score.ajouter_point
                 
 
             #colision par le cote gauche de la boulle et le cote droit de la brique
             if x_brique + largeur_brique - marge <= x_balle - self.__rayon <= x_brique + largeur_brique + marge and y_brique-marge <= y_balle <= y_brique + hauteur_brique+marge:
                 self.rebond_horizontal()
                 brique.detruire()
+                score.ajouter_point
             
             #colision par le cote droite de la boulle et le cote gauche de la brique
             if x_brique - marge <= x_balle + self.__rayon <= x_brique + marge and y_brique -marge <= y_balle <= y_brique + hauteur_brique + marge:
                 self.rebond_horizontal()
                 brique.detruire()
+                score.ajouter_point
 
         else:
             pass
@@ -155,7 +162,7 @@ class balle:
 
     
     
-    def mouvement(self,liste_briques,plateforme):
+    def mouvement(self,liste_briques,plateforme,vies,score):
 
 
         if  self.__x+self.__dx+self.__rayon > 1000:
@@ -164,12 +171,14 @@ class balle:
             self.rebond_horizontal()
         if self.__y+self.__dy+self.__rayon > 520:
             self.detruire()
+            vies.perdre_vie
+
         if self.__y -self.__rayon +self.__dy <0:
             self.rebond_vertical()
 
 
         for i in range (len(liste_briques)):
-            self.colision_balle_brique(liste_briques[i])
+            self.colision_balle_brique(liste_briques[i],score)
         
         self.collision_plateforme(plateforme)
 
@@ -178,7 +187,7 @@ class balle:
         self.__y+=self.__dy
 
         self.__canvas.coords(self.__boullee,self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon)
-        self.__fenetre.after(20, self.mouvement, liste_briques,plateforme)
+        self.__fenetre.after(20, self.mouvement, liste_briques,plateforme,vies,score)
 
     
 

@@ -6,7 +6,7 @@ class Vies:
     Chaque vie est représentée par un cœur (❤️) et la pile est mise à jour automatiquement.
     """
 
-    def __init__(self, frame_top, nb_vies=3, couleur_texte="white", bg="gray15"):
+    def __init__(self, frame_top, nb_vies, couleur_texte="white", bg="gray15"):
         """
         Initialise la pile de vies avec un nombre donné,ici 3,  et configure le label d'affichage
 
