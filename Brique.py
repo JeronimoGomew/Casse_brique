@@ -3,27 +3,35 @@ import random as rd
 import math as mt
 
 
-
-MaFenetre = tk.Tk()
-MaFenetre.title ("Jeu du casse-briques")
-MaFenetre.geometry("1000x600")
-MaFenetre.config(bg="gray20")
-Canvas = tk.Canvas(MaFenetre, bg="black")
-Canvas.pack(fill="both", expand=True)
-
 class Brique:
     def __init__(self , canvas, x, y, largeur, hauteur, couleur):
-        self._canvas = canvas
-        self._x = x
-        self._y = y
-        self._largeur = largeur
-        self._hauteur = hauteur
+        self.__canvas = canvas
+        self.__x = x
+        self.__y = y
+        self.__largeur = largeur
+        self.__hauteur = hauteur
+        self.__couleur = couleur 
+        self.__vivant = True 
         
-        self._brique = self._canvas.create_rectangle(x, y, x + largeur, y + hauteur, fill=couleur)
-        self._couleur = couleur     
+        self.__brique = self.__canvas.create_rectangle(x, y, x + largeur, y + hauteur, fill=couleur)
 
-brique_test = Brique(Canvas, 100, 100, 120, 40, "red")
+    def getx(self):
+        return self.__x
+    def gety(self):
+        return self.__y
+    def getlargeur(self):
+        return self.__largeur    
+    def gethauteur(self):
+        return self.__hauteur
+    def getvivant(self):
+        return self.__vivant
+    
+    def detruire (self):
+        self.__canvas.delete(self.__brique)
+        self.__vivant = False
+ 
+        
 
-if __name__ == "__main__":
-    MaFenetre.mainloop()
+
+
 
