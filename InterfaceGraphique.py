@@ -25,19 +25,20 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
 # Entrées: aucune
 # Sorties: aucune
 # elle se declenche quand on appuie sur le bouton demarrer une nouvelle partie
-def demarrer():
-    
-    ballejeu=b.balle(Zone_jeu,plateforme.getx()+plateforme.getlargeur()/2,plateforme.gety() - 10,10,5,MaFenetre,"red",100)
-    balleinit.detruire()
-    ballejeu.mouvement(liste_briques(),plateforme,gestion_vies,gestion_score)
 
-    
 
+def Lancer():
+    ballejeu.mettre_a_jour_position_depuis_canvas()
+    ballejeu.changer_vitesse(5)
+    ballejeu.mouvement(plateforme,gestion_vies,gestion_score)
+
+
+        
     
 
 
 def liste_briques():
-    marge = 10
+
     liste_br = []
 
     for j in range (4):
@@ -78,7 +79,7 @@ Boutton_Quitter = tk.Button(FrameBottom, text="Quitter",command = MaFenetre.dest
 Boutton_Quitter.pack(side="right", pady=10, padx=10)
 
 # Bouton pour demarrer une nouvelle partie
-Boutton_Demarrer = tk.Button(FrameBottom, text="Demarrer une nouvelle partie",command=demarrer)
+Boutton_Demarrer = tk.Button(FrameBottom, text="Lancer la balle",command=Lancer)
 Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 # Balle de test
@@ -87,8 +88,8 @@ Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 # Plateforme   
 plateforme = pl.plateforme(Zone_jeu,MaFenetre,600,450,140,20,"red")
 
-balleinit=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",120)
-balleinit.suivre_plateforme(plateforme)
+ballejeu=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",120,liste_briques())
+ballejeu.suivre_plateforme(plateforme)
 
 
 

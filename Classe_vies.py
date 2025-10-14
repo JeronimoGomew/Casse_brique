@@ -52,6 +52,9 @@ class Vies:
         """
         self.pile_vies = ["❤️" for _ in range(self.nb_vies_initial)]
         self.var_vies.set(f"Vies : {' '.join(self.pile_vies)}")
+    
+    def getnbvies(self):
+        return len(self.pile_vies)
 
 
 # Bloc de test pour visualiser la classe Vies

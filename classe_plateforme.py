@@ -39,8 +39,7 @@ class plateforme:
     
     def bouger_plateforme(self,event):
         touche=event.keysym
-        print(touche)
-
+        
         if self.__x + self.__largeur +10 > 1000:
             if touche == 'Right':
                 pass
