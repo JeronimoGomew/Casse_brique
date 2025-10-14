@@ -25,11 +25,9 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
 def demarrer():
 
     balle1.changer_vitesse(5)
-    for i in range(9):
-        liste_briques()[i]
-    
-    brique_test=br.Brique(Zone_jeu,9,60,90,40,"blue")
-    balle1.mouvement(brique_test,plateforme)
+    #for i in range(9):
+        #liste_briques()[i]
+    balle1.mouvement(liste_briques(),plateforme)
     
     #balleinit.detruire()
 
@@ -44,18 +42,6 @@ def liste_briques():
             liste_br.append(brique)
     return liste_br
        
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Programme principal

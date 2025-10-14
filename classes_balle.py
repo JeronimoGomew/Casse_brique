@@ -128,11 +128,13 @@ class balle:
 
         if x_plateforme -marge <= x_balle <= x_plateforme + largeur_plateforme + marge and y_plateforme -marge <= y_balle+self.__rayon <= y_plateforme + marge:
                 self.rebond_vertical()
+
+    
     
 
     
     
-    def mouvement(self,brique_test,plateforme):
+    def mouvement(self,liste_briques,plateforme):
 
 
         if  self.__x+self.__dx+self.__rayon > 1000:
@@ -145,7 +147,9 @@ class balle:
             self.rebond_vertical()
 
 
-        self.colision_balle_brique(brique_test)
+        for i in range (len(liste_briques)):
+            self.colision_balle_brique(liste_briques[i])
+        
         self.collision_plateforme(plateforme)
 
         
@@ -153,7 +157,7 @@ class balle:
         self.__y+=self.__dy
 
         self.__canvas.coords(self.__boullee,self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon)
-        self.__fenetre.after(20, self.mouvement, brique_test,plateforme)
+        self.__fenetre.after(20, self.mouvement, liste_briques,plateforme)
 
     
 
