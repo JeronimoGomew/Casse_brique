@@ -62,7 +62,7 @@ FrameTop.pack(fill="x")
 # Canvas pour le jeu
 Zone_jeu = tk.Canvas(MaFenetre, bg="black", width=1000, height=500)
 Zone_jeu.pack()
-""""
+"""
 # Label pour le score 
 Score=tk.StringVar()
 LabelScore = tk.Label(FrameTop, textvariable=Score, fg="white", bg="gray15", font=("Arial", 14, "bold"))
