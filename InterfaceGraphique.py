@@ -23,9 +23,12 @@ def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
 # Sorties: aucune
 # elle se declenche quand on appuie sur le bouton demarrer une nouvelle partie
 def demarrer():
+
     balle1.changer_vitesse(5)
-    brique_test = br.Brique(Zone_jeu, 400, 230, 120, 40, "blue")
-    balle1.mouvement(brique_test)
+    
+    brique_test = br.Brique(Zone_jeu, 10, 10, 120, 40, "blue")
+    balle1.mouvement(brique_test,plateforme)
+    
     #balleinit.detruire()
 
 
@@ -69,7 +72,7 @@ Boutton_Demarrer.pack(side="left", pady=10, padx=10)
 
 # Balle de test
 balleinit=b.balle(Zone_jeu,100,38,10,0,MaFenetre,"blue",0)
-balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",0)
+balle1=b.balle(Zone_jeu,100,270,10,0,MaFenetre,"red",20)
 
 # Plateforme   
 plateforme = pl.plateforme(Zone_jeu,MaFenetre,600,450,50,20,"red")

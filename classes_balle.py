@@ -5,6 +5,7 @@
 import math
 import tkinter as tk
 import Brique as br 
+import classe_plateforme as pl
 
 
 class balle:
@@ -108,11 +109,30 @@ class balle:
 
         else:
             pass
-            
+
+    def collision_plateforme(self,plateforme):
+          
+        if abs(self.__dx)<=5:
+            x_balle = self.__x
+            y_balle = self.__y
+        else:
+            x_balle = self.__x + self.__dx
+            y_balle = self.__y + self.__dy
+        
+        marge = 3 # marge de colision,pour les cas limites 
+
+        x_plateforme = plateforme.getx()
+        y_plateforme = plateforme.gety()
+        largeur_plateforme = plateforme.getlargeur()
+        
+
+        if x_plateforme -marge <= x_balle <= x_plateforme + largeur_plateforme + marge and y_plateforme -marge <= y_balle+self.__rayon <= y_plateforme + marge:
+                self.rebond_vertical()
+    
 
     
     
-    def mouvement(self,brique_test):
+    def mouvement(self,brique_test,plateforme):
 
 
         if  self.__x+self.__dx+self.__rayon > 1000:
@@ -126,13 +146,14 @@ class balle:
 
 
         self.colision_balle_brique(brique_test)
+        self.collision_plateforme(plateforme)
 
         
         self.__x+=self.__dx
         self.__y+=self.__dy
 
         self.__canvas.coords(self.__boullee,self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon)
-        self.__fenetre.after(20, self.mouvement, brique_test)
+        self.__fenetre.after(20, self.mouvement, brique_test,plateforme)
 
     
 
