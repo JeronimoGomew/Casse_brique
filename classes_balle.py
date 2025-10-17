@@ -5,6 +5,20 @@
 from math import cos,sin,sqrt,radians
 from Brique import Brique
 
+#Sommaire de fonctions:
+# initialisation
+# changer_vitesse
+# detruire
+# getteur de difficulté
+# rebond vertical
+# rebond horizontal
+# liste de briques
+# collision_balle_brique
+# collision_plateforme
+# suivre_plateforme
+# mettre a jour les coordonées depuis le Canvas
+# mouvement
+
 
 
 
@@ -100,12 +114,12 @@ class balle:
         hauteur_brique = brique.gethauteur()
 
         # appliquer la fonction que si la brique n'as pas été détruite avant
-        if brique.getvivant()==True:
+        if brique.getvie()==1:
     
             #colisition par le bas de la boulle et le haut de la brique
             if x_brique -marge <= x_balle <= x_brique + largeur_brique + marge and y_brique -marge <= y_balle+self.__rayon <= y_brique + marge:
                 self.rebond_vertical()
-                brique.detruire()
+                brique.enlever_vie()
                 score.ajouter_point()
                 return 0
 
@@ -114,7 +128,7 @@ class balle:
             #colision par le haut de la boulle et le bas de la brique
             if x_brique - marge<= x_balle <= x_brique + largeur_brique + marge and y_brique+ hauteur_brique -marge <= y_balle - self.__rayon <= y_brique+hauteur_brique + marge :
                 self.rebond_vertical()
-                brique.detruire()
+                brique.enlever_vie()
                 score.ajouter_point()
                 return 0
                 
@@ -122,14 +136,14 @@ class balle:
             #colision par le cote gauche de la boulle et le cote droit de la brique
             if x_brique + largeur_brique - marge <= x_balle - self.__rayon <= x_brique + largeur_brique + marge and y_brique-marge <= y_balle <= y_brique + hauteur_brique+marge:
                 self.rebond_horizontal()
-                brique.detruire()
+                brique.enlever_vie()
                 score.ajouter_point()
                 return 0
             
             #colision par le cote droite de la boulle et le cote gauche de la brique
             if x_brique - marge <= x_balle + self.__rayon <= x_brique + marge and y_brique -marge <= y_balle <= y_brique + hauteur_brique + marge:
                 self.rebond_horizontal()
-                brique.detruire()
+                brique.enlever_vie()
                 score.ajouter_point()
                 return 0
 
@@ -246,7 +260,7 @@ class balle:
         
         #enlever le brique de la liste s'il est détruit, comme ca, si on relance il ne réapparait pas
         for brique in self.__liste_briques:
-            if brique.getvivant()==False:
+            if brique.getvie()==0:
                 self.__liste_briques.remove(brique)
         
         #s'il n'y a plus de briques, arreter la balle et reinitialiser les briques en augmentant la vitesse

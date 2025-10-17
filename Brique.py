@@ -18,7 +18,7 @@ class Brique:
         self.__largeur = largeur
         self.__hauteur = hauteur
         self.__couleur = couleur 
-        self.__vivant = True #variable utile dans le programme pour éviter les colisions avec le brique lorsqu'il
+        self.__vie = 1 #variable utile dans le programme pour éviter les colisions avec le brique lorsqu'il
                              #est détruit
         
         # création du brique dans le Canvas
@@ -34,15 +34,42 @@ class Brique:
         return self.__largeur    
     def gethauteur(self):
         return self.__hauteur
-    def getvivant(self):
-        return self.__vivant
+    def getvie(self):
+        return self.__vie
     
     #but: detruire le brique
     #Entrées: Rien
     #Sorties: Rien
-    def detruire (self):
-        self.__canvas.delete(self.__brique)
-        self.__vivant = False
+    def enlever_vie (self):
+        self.__vie -=1
+
+        if self.__vie==0:
+            self.__canvas.delete(self.__brique)
+        else:
+            return
+        
+
+#héritage de la classe Brique
+#Brique avec deux vies
+class Brique_2vies(Brique):
+    def enlever_vie(self):
+        self.__vie -=0.5
+
+        if self.__vie==0:
+            self.__canvas.delete(self.__brique)
+        else:
+            return
+
+
+#héritage de la classe Brique
+#brique qui ne se détruit pas
+class Brique_indestructible(Brique):
+    def enlever_vie(self):
+        return
+
+
+
+
 
        
 
