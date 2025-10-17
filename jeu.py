@@ -1,0 +1,98 @@
+from classe_plateforme import plateforme
+from classes_balle import balle
+from Classe_vies import Vies
+from Brique import Brique
+from Classe_scores import Score
+from tkinter import Frame, Canvas,Button
+
+class jeu :
+    # Constructeur classe jeu
+    # Entrées: fenetre tkinter ou sera mit le jeu
+
+    def __init__(self,fenetre):
+        self.__fenetre=fenetre
+        
+        # Frame du haut pour le score et les vies
+        self.__FrameTop = Frame(self.__fenetre, bg="gray15", height=50)
+        self.__FrameTop.pack(fill="x")
+        
+        
+        # Canvas pour le jeu
+        self.__zone_jeu = Canvas(self.__fenetre,bg='black',width=1000,height=500)
+        self.__zone_jeu.pack()
+
+        # Frame d'en bas pour les bouttons lancer, quitter et nouvelle partie
+        self.__FrameBottom = Frame(self.__fenetre, bg="gray15", height=40)
+        self.__FrameBottom.pack(side="bottom", fill="x")
+
+        # bouton pour quitter la fenetre
+        Boutton_Quitter = Button(self.__FrameBottom, text="Quitter",command = self.__fenetre.destroy)
+        Boutton_Quitter.pack(side="right", pady=10, padx=10)
+
+        # bouton pour commencer une nouvelle partie
+        boutton_reinitier = Button(self.__FrameBottom,text="nouvelle partie",command=self.reinitier)
+        boutton_reinitier.pack(side="left",pady=10,padx=10)
+
+        # bouton pour lancer la balle et jouer
+        Boutton_Demarrer = Button(self.__FrameBottom, text="Lancer la balle",command=self.Lancer)
+        Boutton_Demarrer.pack(pady=10, padx=10)
+
+
+        #initialiser le jeu
+        self.initialiser()
+
+        
+    # initialiser les variables du jeu
+    # Entrée: Rien
+    # Sortie: Rien 
+    def initialiser(self):
+        self.__plateforme = plateforme(self.__zone_jeu,600,450,140,20,"red")
+
+        self.__gestion_vies = Vies(self.__FrameTop, nb_vies=3)
+        self.__gestion_score = Score(self.__FrameTop, nb_points=0)
+
+        self.__ballejeu=balle(self.__zone_jeu,100,270,10,0,self.__fenetre,"red",90,self.liste_briques(),1)
+        self.__ballejeu.suivre_plateforme(self.__plateforme)
+
+    # but: reinitier les variables du jeu
+    # Entrée: rien
+    # Sortie : rien
+    def reinitier(self):
+        self.__zone_jeu.delete("all")
+
+        for widget in self.__FrameTop.winfo_children():
+            widget.destroy()
+        
+
+        self.initialiser()
+
+
+    # but: créer une liste de briques adaptés à la fenetre du jeu
+    # entrées: rien
+    # sortie: liste de briques à insérer dans la classe balle 
+    def liste_briques(self):
+
+        liste_br = []
+
+        # on crée 4 lignes et 10 colonnes de briques 
+        for j in range (4):
+            for i in range (8):
+                brique=Brique(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40,"blue")
+                liste_br.append(brique)
+        return liste_br
+    
+    
+    # fonction pour demarrer une nouvelle partie
+    # Entrées: aucune
+    # Sorties: aucune
+    # elle se declenche quand on appuie sur le bouton demarrer une nouvelle partie
+    def Lancer(self):
+        difficulté=self.__ballejeu.get_difficulte()
+        self.__ballejeu.mettre_a_jour_position_depuis_canvas()
+        self.__ballejeu.changer_vitesse(5+difficulté)
+        self.__ballejeu.mouvement(self.__plateforme,self.__gestion_vies,self.__gestion_score)
+
+
+
+
+

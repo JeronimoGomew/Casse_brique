@@ -45,27 +45,3 @@ class Score:
         self.pile_score = ["💎" for _ in range(self.nb_points_initial)]
         self.var_score.set(f"Score : {len(self.pile_score)} {' '.join(self.pile_score)}")
 
-
-# ---  test pour visualiser la classe Score ---
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Test affichage du Score")
-    root.geometry("600x200")
-    root.config(bg="gray20")
-
-    frame = tk.Frame(root, bg="gray15", height=50)
-    frame.pack(fill="x")
-
-    gestion_score = Score(frame)
-
-    tk.Button(frame, text="+1 point", command=gestion_score.ajouter_point,
-              bg="gray30", fg="black").pack(side="left", padx=10)
-    tk.Button(frame, text="-1 point", command=gestion_score.retirer_point,
-              bg="gray30", fg="black").pack(side="left", padx=10)
-    tk.Button(frame, text="Reset", command=gestion_score.reset,
-              bg="gray30", fg="black").pack(side="left", padx=10)
-    tk.Button(frame, text="Quitter", command=root.destroy,
-              bg="gray30", fg="black").pack(side="left", padx=10)
-
-    root.mainloop()
-    root.quit()
