@@ -62,6 +62,9 @@ class balle:
     #getteur de difficulté
     def get_difficulte(self):
         return(self.__difficulte)
+    
+    def get_vitesse(self):
+        return(self.__vitesse)
 
     # but: detruire la balle du canvas
     # Entrées: aucune
@@ -286,6 +289,7 @@ class balle:
             for brique in self.__liste_briques:
                 brique.detruire()
             self.__liste_briques = self.liste_briques()
+            score.ajouter_niveau()
             return 
         
          

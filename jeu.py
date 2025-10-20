@@ -6,7 +6,7 @@ from random import randint
 from classe_plateforme import plateforme
 from classes_balle import balle
 from Classe_vies import Vies
-from Brique import Brique, Brique_2vies, Brique_indestructible
+from Brique import Brique, Brique_2vies, Brique_indestructible, Brique_rapide,Brique_lent
 from Classe_scores import Score
 from tkinter import Frame, Canvas,Button
 
@@ -82,11 +82,11 @@ class jeu :
         briques_spécial = randint(1,3) #nombres de classes diferentes
         
 
-        # on crée 4 lignes et 10 colonnes de briques 
+        # on crée 4 lignes et 8 colonnes de briques 
         for j in range (4):
-            for i in range (10):
+            for i in range (8):
                 if i == j == briques_spécial:
-                    brique=Brique_2vies(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40)
+                    brique=Brique_lent(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40,self.__fenetre,self.__plateforme)
                     liste_br.append(brique)
                 else:
                     brique=Brique(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40)

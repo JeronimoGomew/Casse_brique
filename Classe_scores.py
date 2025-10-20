@@ -15,10 +15,11 @@ class Score:
         param couleur_texte: Couleur du texte du label
         param bg: Couleur de fond du label      
         """
-        self.nb_points_initial = nb_points
-        self.pile_score = ["💎" for _ in range(nb_points)]  # Un diamant par point
+        self.nb_points = nb_points
+        self.nb_niveaux_complétés = 0
+        self.pile_score = []#"💎" for _ in range(self.nb_niveaux_complétés)]  # Un diamant par point
         self.var_score = tk.StringVar()
-        self.var_score.set(f"Score : {len(self.pile_score)} {' '.join(self.pile_score)}")
+        self.var_score.set(f"Score : {self.nb_points} {' '.join(self.pile_score)}")
 
         self.label_score = tk.Label(
             frame_top,
@@ -31,8 +32,13 @@ class Score:
 
     def ajouter_point(self):
         """On ajoute un point, donc un diamant à l'affichage"""
+        self.nb_points += 1
+        self.var_score.set(f"Score : {self.nb_points} {' '.join(self.pile_score)}")
+    
+    def ajouter_niveau(self):
         self.pile_score.append("💎")
-        self.var_score.set(f"Score : {len(self.pile_score)} {' '.join(self.pile_score)}")
+        self.var_score.set(f"Score : {self.nb_points} {' '.join(self.pile_score)}")
+
 
     def retirer_point(self):
         """on enelève un point, donc un diamant à l'affichage si possible c'est a dire si il reste des diamants a enlver """

@@ -17,6 +17,7 @@ class plateforme:
         self.__largeur=largeur
         self.__hauteur=hauteur
         self.__couleur=couleur
+        self.__pas=20
 
         # création du rectangle dans le canvas
         self.__plateforme=self.__canvas.create_rectangle(self.__x,self.__y,self.__x+self.__largeur,self.__y+self.__hauteur,fill=self.__couleur)
@@ -36,7 +37,11 @@ class plateforme:
         return self.__largeur
     def gethauteur(self):
         return self.__hauteur
-
+    def getpas(self):
+        return self.__pas
+    
+    def changer_pas(self,nvl_valeur):
+        self.__pas = nvl_valeur
     
     
     
@@ -52,21 +57,21 @@ class plateforme:
             if touche == 'Right':
                 pass
             elif touche == 'Left':
-                self.__x -= 20
+                self.__x -= self.__pas
         
         # Si on se trouve au bord à gauche bouger que à droite 
         elif self.__x -10 < 0:
             if touche == 'Right':
-                self.__x += 20
+                self.__x += self.__pas
             elif touche == 'Left':
                 pass
         
         #si on ne se trouve pas au bords, bouger librement
         else: 
             if touche == 'Right':
-                self.__x += 20
+                self.__x += self.__pas
             elif touche == 'Left':
-                self.__x -= 20
+                self.__x -= self.__pas
 
         #actualiser les coordonées  
         self.__canvas.coords(self.__plateforme, self.__x, self.__y, self.__x+ self.__largeur, self.__y + self.__hauteur)

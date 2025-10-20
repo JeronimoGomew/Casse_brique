@@ -2,6 +2,9 @@
 #7/10/2025
 #but: créer la classe brique
 #a améliorer: créer des briques spéciaux
+from tkinter import N
+from PIL import Image,ImageTk
+
 
 class Brique:
     #constructeur de la classe Brique, des rectangles qui se cassent au contact avec la balle.
@@ -89,6 +92,76 @@ class Brique_indestructible(Brique):
     
     def enlever_vie(self):
         return
+
+class Brique_rapide(Brique):
+    def __init__(self,canvas,x,y,largeur,hauteur,fenetre,plateforme):
+
+        super().__init__(canvas, x, y, largeur, hauteur)
+        self._fenetre = fenetre
+        self._plateforme = plateforme
+
+        self._gif=Image.open("LAPIN.gif")
+        self._gif_bonnetaille=self._gif.resize((70,70))
+        self._gif_definitif=ImageTk.PhotoImage(self._gif_bonnetaille)
+
+
+        self._Ximage= (self._x + self._largeur/2)
+        self._Yimage= (self._y-30)
+        self.changer_couleur("orange")
+
+        self._dif_vitesse=40
+        self._gif_canvas=self._canvas.create_image(self._Ximage,self._Yimage,image= self._gif_definitif, anchor=N)
+        
+    def bouger_gif(self):
+        dy=3
+        self._Yimage += dy
+        self._canvas.coords(self._gif_canvas,self._Ximage,self._Yimage)
+        
+        
+        if self._Yimage>400:
+            self._canvas.delete(self._gif_canvas)
+            return 
+        self._fenetre.after(20,self.bouger_gif)
+
+
+    def detruire(self):
+        vitesse_init_plateforme = self._plateforme.getpas()
+        self._canvas.delete(self._gif_canvas)
+
+
+        self._canvas.delete(self._brique)
+        self._gif_canvas=self._canvas.create_image(self._Ximage,self._Yimage,image= self._gif_definitif, anchor=N)
+        self.bouger_gif()
+
+        self._plateforme.changer_pas(vitesse_init_plateforme+self._dif_vitesse)
+        self._fenetre.after(6000,self._plateforme.changer_pas,vitesse_init_plateforme)
+    
+class Brique_lent(Brique_rapide):
+    def __init__(self,canvas,x,y,largeur,hauteur,fenetre,plateforme):
+
+        super().__init__(canvas, x, y, largeur, hauteur,fenetre,plateforme,)
+        
+
+        self._gif=Image.open("TORTUE.gif")
+        self._gif_bonnetaille=self._gif.resize((70,70))
+        self._gif_definitif=ImageTk.PhotoImage(self._gif_bonnetaille)
+        self._gif_canvas=self._canvas.create_image(self._Ximage,self._Yimage,image= self._gif_definitif, anchor=N)
+                                                   
+        self._dif_vitesse=(-15)
+
+    
+        self.changer_couleur("yellow")
+        
+   
+
+
+    
+
+        
+    
+    
+
+
 
 
 
