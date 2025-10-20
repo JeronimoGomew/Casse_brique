@@ -1,7 +1,12 @@
+#Jeronimo Gomez
+#17/10/2025
+#but: créer une classe jeu pour initialiser les variables du jeu, et pouvoir ré-initialiser facilement
+
+from random import randint
 from classe_plateforme import plateforme
 from classes_balle import balle
 from Classe_vies import Vies
-from Brique import Brique
+from Brique import Brique, Brique_2vies, Brique_indestructible
 from Classe_scores import Score
 from tkinter import Frame, Canvas,Button
 
@@ -58,27 +63,34 @@ class jeu :
     # Entrée: rien
     # Sortie : rien
     def reinitier(self):
-        self.__zone_jeu.delete("all")
+        self.__zone_jeu.delete("all")#efface tout sur le canvas
 
-        for widget in self.__FrameTop.winfo_children():
+        for widget in self.__FrameTop.winfo_children():#efface tout sur le Frame d'en haut (reinitialiser les vies et le score)
             widget.destroy()
         
 
-        self.initialiser()
+        self.initialiser()#initalise tout à nouveau 
 
 
     # but: créer une liste de briques adaptés à la fenetre du jeu
     # entrées: rien
     # sortie: liste de briques à insérer dans la classe balle 
     def liste_briques(self):
-
+        
+         
         liste_br = []
+        briques_spécial = randint(1,3) #nombres de classes diferentes
+        
 
         # on crée 4 lignes et 10 colonnes de briques 
         for j in range (4):
-            for i in range (8):
-                brique=Brique(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40,"blue")
-                liste_br.append(brique)
+            for i in range (10):
+                if i == j == briques_spécial:
+                    brique=Brique_2vies(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40)
+                    liste_br.append(brique)
+                else:
+                    brique=Brique(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40)
+                    liste_br.append(brique)
         return liste_br
     
     

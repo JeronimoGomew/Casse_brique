@@ -3,7 +3,7 @@
 #But: créer la classe balle pour le jeu de casses briques 
 
 from math import cos,sin,sqrt,radians
-from Brique import Brique
+from Brique import Brique, Brique_indestructible
 
 #Sommaire de fonctions:
 # initialisation
@@ -88,7 +88,7 @@ class balle:
         #on crée 4 lignes et 10 colonnes de briques 
         for j in range (4):
             for i in range (10):
-                brique=Brique(self.__canvas,9 + i*90 + i*9,10 + 50*j,90,40,"blue")
+                brique=Brique(self.__canvas,9 + i*90 + i*9,10 + 50*j,90,40)
                 liste_br.append(brique)
         return liste_br
 
@@ -114,13 +114,16 @@ class balle:
         hauteur_brique = brique.gethauteur()
 
         # appliquer la fonction que si la brique n'as pas été détruite avant
-        if brique.getvie()==1:
+        if brique.getvie()>0:
     
             #colisition par le bas de la boulle et le haut de la brique
             if x_brique -marge <= x_balle <= x_brique + largeur_brique + marge and y_brique -marge <= y_balle+self.__rayon <= y_brique + marge:
                 self.rebond_vertical()
                 brique.enlever_vie()
-                score.ajouter_point()
+                if type(brique) is Brique_indestructible:
+                    return 0
+                else:
+                    score.ajouter_point()
                 return 0
 
                 
@@ -129,7 +132,10 @@ class balle:
             if x_brique - marge<= x_balle <= x_brique + largeur_brique + marge and y_brique+ hauteur_brique -marge <= y_balle - self.__rayon <= y_brique+hauteur_brique + marge :
                 self.rebond_vertical()
                 brique.enlever_vie()
-                score.ajouter_point()
+                if type(brique) is Brique_indestructible:
+                    return 0
+                else:
+                    score.ajouter_point()
                 return 0
                 
 
@@ -137,14 +143,20 @@ class balle:
             if x_brique + largeur_brique - marge <= x_balle - self.__rayon <= x_brique + largeur_brique + marge and y_brique-marge <= y_balle <= y_brique + hauteur_brique+marge:
                 self.rebond_horizontal()
                 brique.enlever_vie()
-                score.ajouter_point()
+                if type(brique) is Brique_indestructible:
+                    return 0
+                else:
+                    score.ajouter_point()
                 return 0
             
             #colision par le cote droite de la boulle et le cote gauche de la brique
             if x_brique - marge <= x_balle + self.__rayon <= x_brique + marge and y_brique -marge <= y_balle <= y_brique + hauteur_brique + marge:
                 self.rebond_horizontal()
                 brique.enlever_vie()
-                score.ajouter_point()
+                if type(brique) is Brique_indestructible:
+                    return 0
+                else:
+                    score.ajouter_point()
                 return 0
 
         else:
@@ -258,21 +270,25 @@ class balle:
         for i in range (len(self.__liste_briques)):
             self.colision_balle_brique(self.__liste_briques[i],score)
         
-        #enlever le brique de la liste s'il est détruit, comme ca, si on relance il ne réapparait pas
+        #enlever le brique de la liste s'il est détruit ou s'il est indesctrubtible, comme ca, si on relance il ne réapparait pas
         for brique in self.__liste_briques:
+            brique_indestructible = 0
             if brique.getvie()==0:
                 self.__liste_briques.remove(brique)
+            if type(brique) is Brique_indestructible:
+                brique_indestructible += 1
         
         #s'il n'y a plus de briques, arreter la balle et reinitialiser les briques en augmentant la vitesse
-        if self.__liste_briques==[]:
+        if self.__liste_briques==[] or len(self.__liste_briques) == brique_indestructible :
             self.changer_vitesse(0)
             self.suivre_plateforme(plateforme)
             self.__difficulte += 1
+            for brique in self.__liste_briques:
+                brique.detruire()
             self.__liste_briques = self.liste_briques()
-            self.__angle = radians(90)                      #reinitialise l'angle de départ
-            self.__dx = self.__vitesse * sin(self.__angle)  #reinitialise le vecteur vitesse avec les nouveaux valeurs
-            self.__dy = self.__vitesse * cos(self.__angle) 
             return 
+        
+         
                     
 
 
