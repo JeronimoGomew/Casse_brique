@@ -1,14 +1,16 @@
-#Jeronimo Gomez 
-#7/10/2025
-#but: créer la classe plateforme pour le jeu de casse briques
-
+"""
+Jeronimo Gomez et daoud Hechaichi
+but: créer la classe plateforme pour le jeu de casse briques
+"""
 class plateforme:
-    #constructeur de la classe plateforme, un rectangle que l'utilisateur controle avec les fleches du clavier 
-    #Entrées: canvas,canvas ou la balle sera dessinée (Canvas)
-    #         x,y: coordonées du coin superieur gauche de la plateforme (entiers)
-    #         larguer: larguer de la plateforme (entier)
-    #         hauteur: hauteur de la plateforme (entier)
-    #         couleur: couleur de la plateforme (str)
+    """
+    constructeur de la classe plateforme, un rectangle que l'utilisateur controle avec les fleches du clavier 
+    Entrées: canvas,canvas ou la balle sera dessinée (Canvas)
+             x,y: coordonées du coin superieur gauche de la plateforme (entiers)
+             larguer: larguer de la plateforme (entier)
+             hauteur: hauteur de la plateforme (entier)
+             couleur: couleur de la plateforme (str)
+             """
             
     def __init__(self,canvas,x,y,largeur,hauteur,couleur):
         self.__canvas=canvas
@@ -44,9 +46,10 @@ class plateforme:
         self.__pas = nvl_valeur
     
     
-    
-    #but: fonction qui fait bouger la plateforme
-    #Entrée: event (touche que l'utilisateur presse, dans ce cas fleche droite ou gauche)
+    """
+    but: fonction qui fait bouger la plateforme
+    Entrée: event (touche que l'utilisateur presse, dans ce cas fleche droite ou gauche)
+    """
     def bouger_plateforme(self,event):
         touche=event.keysym
 

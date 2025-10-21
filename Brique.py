@@ -1,21 +1,25 @@
-#Daoud Hechaichi et Jeronimo Gomez
-#7/10/2025
-#but: créer la classe brique
-#a améliorer: créer des briques spéciaux
+"""
+Daoud Hechaichi et Jeronimo Gomez
+7/10/2025
+but: créer la classe brique
+a améliorer: créer des briques spéciaux
+"""
+
 from tkinter import N
 from PIL import Image,ImageTk
 
 
 class Brique:
-    #constructeur de la classe Brique, des rectangles qui se cassent au contact avec la balle.
-    #il y a aussi des sousclasses avec des briques spéciaux
+    """
+    constructeur de la classe Brique, des rectangles qui se cassent au contact avec la balle.
+    il y a aussi des sousclasses avec des briques spéciaux
  
-    #Entrées: Canvas, canvas ou seron les briques (Canvas)
-    #         x,y: coordonnées du coin superieur gauche des briques (entier)
-    #         largeur: largeur des briques (entier)
-    #         hauteur: hauteur des briques (entier)
-    #         couleur: couleur des briques (str)
-
+    Entrées: Canvas, canvas ou seron les briques (Canvas)
+             x,y: coordonnées du coin superieur gauche des briques (entier)
+             largeur: largeur des briques (entier)
+             hauteur: hauteur des briques (entier)
+             couleur: couleur des briques (str)
+"""
     def __init__(self , canvas, x, y, largeur, hauteur):
         self._canvas = canvas
         self._x = x
@@ -42,10 +46,11 @@ class Brique:
     def getvie(self):
         return self._vie
     
-    #but: detruire le brique
-    #Entrées: Rien
-    #Sorties: Rien
+   
     def enlever_vie (self):
+        #but: detruire le brique
+        #Entrées: Rien
+        #Sorties: Rien
         self._vie -=1
 
         if self._vie==0:
@@ -61,10 +66,11 @@ class Brique:
 
         
 
-#héritage de la classe Brique
-#Brique avec deux vies, (se casse avec duex contacts avec la balle)
 class Brique_2vies(Brique):
     def __init__(self, canvas, x, y, largeur, hauteur):
+
+#héritage de la classe Brique
+#Brique avec deux vies, (se casse avec duex contacts avec la balle)
         super().__init__(canvas, x, y, largeur, hauteur)
         self._vie = 2
         self._couleur="green"
@@ -81,9 +87,10 @@ class Brique_2vies(Brique):
     
 
 
+class Brique_indestructible(Brique):
+
 #héritage de la classe Brique
 #brique qui ne se détruit pas
-class Brique_indestructible(Brique):
     def __init__(self, canvas, x, y, largeur, hauteur):
         super().__init__(canvas, x, y, largeur, hauteur)
         self._couleur="grey"

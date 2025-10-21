@@ -1,4 +1,4 @@
-#Jeronimo Gomez
+#Jeronimo Gomez et Daoud Hechaichi
 #7/10/2025
 #But: créer la classe balle pour le jeu de casses briques 
 
