@@ -1,4 +1,4 @@
-#Jeronimo Gomez
+#Jeronimo Gomez et Daoud Hechaichi
 #17/10/2025
 #but: créer une classe jeu pour initialiser les variables du jeu, et pouvoir ré-initialiser facilement
 
@@ -33,14 +33,22 @@ class jeu :
         # bouton pour quitter la fenetre
         Boutton_Quitter = Button(self.__FrameBottom, text="Quitter",command = self.__fenetre.destroy)
         Boutton_Quitter.pack(side="right", pady=10, padx=10)
+                # liaison de la touche Échap pour quitter le jeu
+        self.__fenetre.bind("<Escape>", lambda event: self.__fenetre.destroy())
 
         # bouton pour commencer une nouvelle partie
         boutton_reinitier = Button(self.__FrameBottom,text="nouvelle partie",command=self.reinitier)
         boutton_reinitier.pack(side="left",pady=10,padx=10)
+        self.__fenetre.bind("<R>", lambda event: self.reinitier()) 
+        self.__fenetre.bind("<r>", lambda event: self.reinitier()) 
+
+
 
         # bouton pour lancer la balle et jouer
         Boutton_Demarrer = Button(self.__FrameBottom, text="Lancer la balle",command=self.Lancer)
         Boutton_Demarrer.pack(pady=10, padx=10)
+                # liaison de la touche espace pour lancer la balle
+        self.__fenetre.bind("<space>", lambda event: self.Lancer())
 
 
         #initialiser le jeu
