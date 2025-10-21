@@ -48,9 +48,11 @@ class Brique:
     
    
     def enlever_vie (self):
+        """
         #but: detruire le brique
         #Entrées: Rien
         #Sorties: Rien
+        """
         self._vie -=1
 
         if self._vie==0:
@@ -68,9 +70,10 @@ class Brique:
 
 class Brique_2vies(Brique):
     def __init__(self, canvas, x, y, largeur, hauteur):
-
-#héritage de la classe Brique
-#Brique avec deux vies, (se casse avec duex contacts avec la balle)
+        """
+     héritage de la classe Brique
+     Brique avec deux vies, (se casse avec duex contacts avec la balle)
+     """
         super().__init__(canvas, x, y, largeur, hauteur)
         self._vie = 2
         self._couleur="green"
@@ -88,9 +91,10 @@ class Brique_2vies(Brique):
 
 
 class Brique_indestructible(Brique):
-
-#héritage de la classe Brique
-#brique qui ne se détruit pas
+    """
+héritage de la classe Brique
+brique qui ne se détruit pas
+        """
     def __init__(self, canvas, x, y, largeur, hauteur):
         super().__init__(canvas, x, y, largeur, hauteur)
         self._couleur="grey"
