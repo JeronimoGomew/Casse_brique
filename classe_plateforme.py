@@ -28,9 +28,7 @@ class plateforme:
         self.__canvas.focus_set()
         self.__canvas.bind('<Left>',self.bouger_plateforme)
         self.__canvas.bind('<Right>',self.bouger_plateforme)
-                # liaison des mouvements du trackpad (scroll horizontal)
-        self.__canvas.bind("<Shift-MouseWheel>", self.bouger_plateforme)
-        self.__canvas.bind("<MouseWheel>", self.bouger_plateforme)
+           
         
        
     #getteurs des coordonnées, largeur et hauteur de la plateforme
