@@ -1,37 +1,41 @@
-#Jeronimo Gomez et Daoud Hechaichi
-#7/10/2025
-#But: créer la classe balle pour le jeu de casses briques 
-
+"""
+Jeronimo Gomez et Daoud Hechaichi
+7/10/2025
+But: créer la classe balle pour le jeu de casses briques 
+"""
 from math import cos,sin,sqrt,radians
 from Brique import Brique, Brique_indestructible
 
-#Sommaire de fonctions:
-# initialisation
-# changer_vitesse
-# detruire
-# getteur de difficulté
-# rebond vertical
-# rebond horizontal
-# liste de briques
-# collision_balle_brique
-# collision_plateforme
-# suivre_plateforme
-# mettre a jour les coordonées depuis le Canvas
-# mouvement
-
+""""
+Sommaire de fonctions:
+ initialisation
+ changer_vitesse
+ detruire
+ getteur de difficulté
+ rebond vertical
+ rebond horizontal
+ liste de briques
+ collision_balle_brique
+ collision_plateforme
+ suivre_plateforme
+ mettre a jour les coordonées depuis le Canvas
+ mouvement
+"""
 
 
 
 class balle:
-    # constructeur de la classe balle
-    # Entrées: canvas: canvas ou la balle sera dessinée
-    #          x,y: coords initiales de la balle, on fait en sorte qu'elles soient au milieu de la boulle (entiers)
-    #          rayon: rayon de la balle (entier)
-    #          vitesse: vitesse initiale de la balle (entier)
-    #          fenetre: fenetre principale (Tk)
-    #          couleur: couleur de la balle (chaine de caracteres)
-    #          angle: angle de depart de la balle (en radian)
-    # Sorties: aucune
+    """
+     constructeur de la classe balle
+     Entrées: canvas: canvas ou la balle sera dessinée
+              x,y: coords initiales de la balle, on fait en sorte qu'elles soient au milieu de la boulle (entiers)
+              rayon: rayon de la balle (entier)
+              vitesse: vitesse initiale de la balle (entier)
+              fenetre: fenetre principale (Tk)
+              couleur: couleur de la balle (chaine de caracteres)
+              angle: angle de depart de la balle (en radian)
+     Sorties: aucune
+    """
     def __init__(self,canvas,x,y,rayon,vitesse,fenetre,couleur,angle,liste_briques,difficulte):
 
         self.__liste_briques=liste_briques
@@ -52,10 +56,13 @@ class balle:
         self.__couleur=couleur
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
 
-    # but: changer la vitesse de la balle, en changeant les composantes dx et dy
+   
+    def changer_vitesse(self,nouvelle_vitesse):
+        """
+         # but: changer la vitesse de la balle, en changeant les composantes dx et dy
     # Entrées: nouvelle_vitesse (entier)
     # Sorties: aucune
-    def changer_vitesse(self,nouvelle_vitesse):
+    """
         self.__dx = nouvelle_vitesse*cos(self.__angle)
         self.__dy = nouvelle_vitesse*sin(self.__angle)
 
@@ -66,22 +73,32 @@ class balle:
     def get_vitesse(self):
         return(self.__vitesse)
 
-    # but: detruire la balle du canvas
-    # Entrées: aucune
-    # Sorties: aucune        
+        
     def detruire(self):
+        """
+         but: detruire la balle du canvas
+    Entrées: aucune
+      Sorties: aucune 
+    """
+      
         self.__canvas.delete(self.__boullee)
 
-    # but: faire rebondir la balle verticalement
+
+    def rebond_vertical(self):
+        '''
+            # but: faire rebondir la balle verticalement
     # Entrées: aucune
     # Sorties: aucune
-    def rebond_vertical(self):
+    '''
         self.__dy=-self.__dy
 
-    # but: faire rebondir la balle horizontalement
+    
+    def rebond_horizontal(self):
+        """
+        # but: faire rebondir la balle horizontalement
     # Entrées: aucune
     # Sorties: aucune
-    def rebond_horizontal(self):
+    """
         self.__dx=-self.__dx
 
     def liste_briques(self):
@@ -96,12 +113,14 @@ class balle:
         return liste_br
 
 
-    # but: detecter la colision entre la balle et une brique, en detruisant la brique et ajoutant un point
-    # Entrées: brique (objet de la classe Brique)
-    # Sorties: aucune
+  
     def colision_balle_brique(self, brique,score):
-        
+        """
+          but: detecter la colision entre la balle et une brique, en detruisant la brique et ajoutant un point
+     Entrées: brique (objet de la classe Brique)
+     Sorties: aucune
         #prédire la position si la balle va vite
+        """
         if abs(self.__dx)<=5:
             x_balle = self.__x
             y_balle = self.__y
@@ -165,11 +184,13 @@ class balle:
         else:
             pass
 
-    #but: gérer la colision avec la plateforme, en utilisant le principe de Descartes
-    #Entrée: plateforme (rectangle dans un Canvas)
-    #Sortie : Rien
+   
     def collision_plateforme(self,plateforme):
-          
+        """
+         but: gérer la colision avec la plateforme, en utilisant le principe de Descartes
+    Entrée: plateforme (rectangle dans un Canvas)
+    Sortie : Rien
+          """
          #prediction de la position si la balle va vite  
         if abs(self.__dx)<=5:
             x_balle = self.__x
@@ -208,10 +229,13 @@ class balle:
             self.__y = y_plateforme - self.__rayon - 1
     
 
-    #but: fonction qui fait que la balle reste sur la plateforme au début du jeu
-    #Entrée: plateforme
-    #sortie: Rien
+   
     def suivre_plateforme(self,plateforme):
+        """
+         but: fonction qui fait que la balle reste sur la plateforme au début du jeu
+    Entrée: plateforme
+    sortie: Rien
+            """
         x_plat = plateforme.getx()
         y_plat = plateforme.gety()
         largeur_plat = plateforme.getlargeur()
