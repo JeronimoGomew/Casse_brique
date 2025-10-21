@@ -76,23 +76,64 @@ class jeu :
     # entrées: rien
     # sortie: liste de briques à insérer dans la classe balle 
     def liste_briques(self):
-        
-         
+        dico_briques = {0: list(range(8)),1: list(range(8)),2: list(range(8)),3:list(range(8))}
         liste_br = []
-        briques_spécial = randint(1,3) #nombres de classes diferentes
+
+        briques_speciaux=[]
+        for l in range(5):
+            ligne_aleatoire = randint(0,3) 
+            colonne_aleatoire = randint(0,(len(dico_briques[ligne_aleatoire])-1))
+
+            
+            briques_speciaux.append([ligne_aleatoire,dico_briques[ligne_aleatoire][colonne_aleatoire]])
+
+            dico_briques[ligne_aleatoire].pop(colonne_aleatoire)
+        
         
 
         # on crée 4 lignes et 8 colonnes de briques 
         for j in range (4):
             for i in range (8):
-                if i == j == briques_spécial:
-                    brique=Brique_lent(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40,self.__fenetre,self.__plateforme)
+                    largeur = 90
+                    hauteur = 40
+                    x = 9 + largeur + i*(9+largeur)
+                    y = 10 + 50*j
+                    
+                    brique=Brique(self.__zone_jeu,x,y,largeur,hauteur)
                     liste_br.append(brique)
-                else:
-                    brique=Brique(self.__zone_jeu,9 +90 + i*90 + i*9,10 + 50*j,90,40)
-                    liste_br.append(brique)
+
+        
+        for l,coords in enumerate(briques_speciaux):
+            
+            quel_brique = l%4
+            largeur=90
+            hauteur=40
+            x = 9 + largeur + (coords[1])*(9+largeur)
+            y = 10 + 50*coords[0]  
+            index_liste = coords[0] * 8 + (coords[1])
+            liste_br[index_liste].detruire()
+
+            if quel_brique==0:
+                liste_br[index_liste]=Brique_2vies(self.__zone_jeu,x,y,largeur,hauteur)
+
+            elif quel_brique==1:
+                liste_br[index_liste]=Brique_indestructible(self.__zone_jeu,x,y,largeur,hauteur)
+            
+            elif quel_brique==2:
+                liste_br[index_liste]=Brique_rapide(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+
+            elif quel_brique==3:
+                liste_br[index_liste]=Brique_lent(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+         
         return liste_br
-    
+            
+
+
+        
+        
+
+        
+
     
     # fonction pour demarrer une nouvelle partie
     # Entrées: aucune

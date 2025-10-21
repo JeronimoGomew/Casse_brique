@@ -3,7 +3,8 @@
 #But: créer la classe balle pour le jeu de casses briques 
 
 from math import cos,sin,sqrt,radians
-from Brique import Brique, Brique_indestructible
+from Brique import Brique, Brique_indestructible,Brique_2vies,Brique_lent,Brique_rapide
+from random import randint
 
 #Sommaire de fonctions:
 # initialisation
@@ -52,10 +53,11 @@ class balle:
         self.__couleur=couleur
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
 
-    # but: changer la vitesse de la balle, en changeant les composantes dx et dy
-    # Entrées: nouvelle_vitesse (entier)
-    # Sorties: aucune
+    
     def changer_vitesse(self,nouvelle_vitesse):
+        # but: changer la vitesse de la balle, en changeant les composantes dx et dy
+        # Entrées: nouvelle_vitesse (entier)
+        # Sorties: aucune
         self.__dx = nouvelle_vitesse*cos(self.__angle)
         self.__dy = nouvelle_vitesse*sin(self.__angle)
 
@@ -85,14 +87,55 @@ class balle:
         self.__dx=-self.__dx
 
     def liste_briques(self):
-
+        dico_briques = {0: list(range(8)),1: list(range(8)),2: list(range(8)),3:list(range(8))}
         liste_br = []
 
-        #on crée 4 lignes et 10 colonnes de briques 
+        briques_speciaux=[]
+        for l in range(5+self.__difficulte):
+            ligne_aleatoire = randint(0,3) 
+            colonne_aleatoire = randint(0,(len(dico_briques[ligne_aleatoire])-1))
+
+            
+            briques_speciaux.append([ligne_aleatoire,dico_briques[ligne_aleatoire][colonne_aleatoire]])
+
+            dico_briques[ligne_aleatoire].pop(colonne_aleatoire)
+        
+        
+
+        # on crée 4 lignes et 8 colonnes de briques 
         for j in range (4):
-            for i in range (10):
-                brique=Brique(self.__canvas,9 + i*90 + i*9,10 + 50*j,90,40)
-                liste_br.append(brique)
+            for i in range (8):
+                    largeur = 90
+                    hauteur = 40
+                    x = 9 + largeur + i*(9+largeur)
+                    y = 10 + 50*j
+                    
+                    brique=Brique(self.__zone_jeu,x,y,largeur,hauteur)
+                    liste_br.append(brique)
+
+        
+        for l,coords in enumerate(briques_speciaux):
+            
+            quel_brique = l%4
+            largeur=90
+            hauteur=40
+            x = 9 + largeur + (coords[1])*(9+largeur)
+            y = 10 + 50*coords[0]  
+            index_liste = coords[0] * 8 + (coords[1])
+            liste_br[index_liste].detruire()
+
+            if quel_brique==0:
+                liste_br[index_liste]=Brique_2vies(self.__zone_jeu,x,y,largeur,hauteur)
+
+            elif quel_brique==1:
+                liste_br[index_liste]=Brique_indestructible(self.__zone_jeu,x,y,largeur,hauteur)
+            
+            elif quel_brique==2:
+                liste_br[index_liste]=Brique_rapide(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+
+            elif quel_brique==3:
+                liste_br[index_liste]=Brique_lent(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+         
         return liste_br
 
 
@@ -224,7 +267,7 @@ class balle:
         #le jeu et dans la fonction mouvement
         if self.__dx==0 and self.__dy==0:
             self.__canvas.coords(self.__boullee,X,Y,X+2*self.__rayon,Y+2*self.__rayon)
-            self.__fenetre.after(20,self.suivre_plateforme,plateforme)
+            self.__fenetre.after(10,self.suivre_plateforme,plateforme)
         else:
             return
             

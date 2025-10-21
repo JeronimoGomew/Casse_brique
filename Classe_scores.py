@@ -2,9 +2,9 @@ import tkinter as tk
 
 class Score:
     """
-    Cette classe s'occupe du  score, et l'affiche de façon claire dans une interface tki,nter 
-    À chaque point gagné un diamant 💎 s'ajoute à l'affichage
-    À chaque point perdu un diamant 💎 s'enlève de l'affichage si possibl
+    Cette classe s'occupe du  score 
+    À chaque point gagné un diamant +1 s'ajoute à l'affichage
+    À chaque point perdu un diamant -1 s'enlève de l'affichage 
     on peut aussi remettre le score à zéro
     """
 

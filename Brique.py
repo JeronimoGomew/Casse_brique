@@ -42,10 +42,11 @@ class Brique:
     def getvie(self):
         return self._vie
     
-    #but: detruire le brique
-    #Entrées: Rien
-    #Sorties: Rien
+    
     def enlever_vie (self):
+        #but: detruire le brique
+        #Entrées: Rien
+        #Sorties: Rien
         self._vie -=1
 
         if self._vie==0:
@@ -93,6 +94,7 @@ class Brique_indestructible(Brique):
     def enlever_vie(self):
         return
 
+
 class Brique_rapide(Brique):
     def __init__(self,canvas,x,y,largeur,hauteur,fenetre,plateforme):
 
@@ -125,17 +127,22 @@ class Brique_rapide(Brique):
 
 
     def detruire(self):
-        vitesse_init_plateforme = self._plateforme.getpas()
+        
         self._canvas.delete(self._gif_canvas)
 
 
         self._canvas.delete(self._brique)
         self._gif_canvas=self._canvas.create_image(self._Ximage,self._Yimage,image= self._gif_definitif, anchor=N)
         self.bouger_gif()
-
+        self.bonus()
+    
+    def bonus(self):
+        vitesse_init_plateforme = self._plateforme.getpas()
         self._plateforme.changer_pas(vitesse_init_plateforme+self._dif_vitesse)
         self._fenetre.after(6000,self._plateforme.changer_pas,vitesse_init_plateforme)
-    
+
+
+
 class Brique_lent(Brique_rapide):
     def __init__(self,canvas,x,y,largeur,hauteur,fenetre,plateforme):
 
@@ -143,14 +150,19 @@ class Brique_lent(Brique_rapide):
         
 
         self._gif=Image.open("TORTUE.gif")
-        self._gif_bonnetaille=self._gif.resize((70,70))
+        self._gif_bonnetaille=self._gif.resize((60,60))
         self._gif_definitif=ImageTk.PhotoImage(self._gif_bonnetaille)
+        self._Yimage=(self._y-10)
         self._gif_canvas=self._canvas.create_image(self._Ximage,self._Yimage,image= self._gif_definitif, anchor=N)
                                                    
         self._dif_vitesse=(-15)
 
     
         self.changer_couleur("yellow")
+
+
+#file: si on prend un brique rapide et lent en un meme lapse de temps, alors on fait premier lún puis l'autre
+#bonus: faire que la tortue et le lapin suivent la platforme, (ils montent)
         
    
 
