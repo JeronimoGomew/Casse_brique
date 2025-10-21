@@ -1,4 +1,4 @@
-#Jeronimo Gomez
+#Jeronimo Gomez et Daoud Hechaichi
 #17/10/2025
 #but: créer une classe jeu pour initialiser les variables du jeu, et pouvoir ré-initialiser facilement
 

@@ -29,6 +29,7 @@ class plateforme:
         self.__canvas.bind('<Left>',self.bouger_plateforme)
         self.__canvas.bind('<Right>',self.bouger_plateforme)
         
+        
        
     #getteurs des coordonnées, largeur et hauteur de la plateforme
     def getx(self):
@@ -75,6 +76,7 @@ class plateforme:
                 self.__x += self.__pas
             elif touche == 'Left':
                 self.__x -= self.__pas
+
 
         #actualiser les coordonées  
         self.__canvas.coords(self.__plateforme, self.__x, self.__y, self.__x+ self.__largeur, self.__y + self.__hauteur)
