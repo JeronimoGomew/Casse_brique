@@ -40,9 +40,20 @@ Des differentes structures de données sont utilisées:
 - Bouton **nouvelle partie / Rejouer** pour relancer une partie sans redémarrer le jeu.  
 - Interface graphique sous Tkinter.   
 - Ajout d’éléments visuels : **tortue**🐢 et **lapin** 🐇 sur le canvas.   
-- Architecture orientée objet.  
+- Programation orientée objet.  
 
 
+## ⌨️ Raccourcis clavier 💡
+
+Plusieurs raccourcis clavier ont été ajoutés pour pouvoir jouer sans souris :
+
+| Touche | Action |
+|:-------|:--------|
+| **Espace** ⎵ | Lance la balle (équivalent du bouton *Démarrer/Rejouer*) |
+| **R** 🔁 | Redémarre une nouvelle partie |
+| **Échap** ⎋ | Quitte le jeu et ferme la fenêtre Tkinter |
+
+ 
 
 ## 🧠 Structure du projet
 ```bash
