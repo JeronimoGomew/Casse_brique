@@ -46,13 +46,7 @@ class Brique:
     def getvie(self):
         return self._vie
     
-<<<<<<< HEAD
-    
-    def enlever_vie (self):
-        #but: detruire le brique
-        #Entrées: Rien
-        #Sorties: Rien
-=======
+
    
     def enlever_vie (self):
         """
@@ -60,7 +54,6 @@ class Brique:
         #Entrées: Rien
         #Sorties: Rien
         """
->>>>>>> df2d20767bf1d21c25be20ef0988257f980a26dd
         self._vie -=1
 
         if self._vie==0:
