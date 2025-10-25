@@ -1,9 +1,12 @@
-"""#Daoud Hechaichi et Jeronimo Gomez"""
+"""Daoud Hechaichi et Jeronimo Gomez"""
+"18/10/2025"
+"but: créer la classe vie avec une structure de pile"
+
 from tkinter import StringVar,Label
 
 class Vies:
     """
-    partie qui gerent du joueur les vies du joueur sous forme d'une pile de cœurs affichée dans une interface Tkinter.
+    partie qui gerent  les vies du joueur sous forme d'une pile.
     Chaque vie est représentée par un cœur (❤️) et la pile est mise à jour automatiquement.
     """
 
@@ -30,6 +33,7 @@ class Vies:
         )
         self.label_vies.pack(side="right", padx=20, pady=10)
 
+
     def perdre_vie(self):
         """
        enleve une vie a la pile donc au joueur si possiblke et met a jour l'affichage en consequence
@@ -38,21 +42,6 @@ class Vies:
             self.pile_vies.pop()
         self.var_vies.set(f"Vies : {' '.join(self.pile_vies)}")
 
-    def ajouter_vie(self):
-        """
-        Ajoute une vie à la pile
-        Met à jour l'affichage en conséquence
-        """
-        self.pile_vies.append("❤️")
-        self.var_vies.set(f"Vies : {' '.join(self.pile_vies)}")
-
-    def reset(self):
-        """
-        Remet la pile de vies à son état initial
-        Met à jour l'affichage
-        """
-        self.pile_vies = ["❤️" for _ in range(self.nb_vies_initial)]
-        self.var_vies.set(f"Vies : {' '.join(self.pile_vies)}")
     
     def getnbvies(self):
         return len(self.pile_vies)

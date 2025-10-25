@@ -1,6 +1,7 @@
 """
 Jeronimo Gomez et daoud Hechaichi
 but: créer la classe plateforme pour le jeu de casse briques
+a ameliorer: ameliorer la fluidité de la plateforme
 """
 class plateforme:
     """
@@ -30,8 +31,9 @@ class plateforme:
         self.__canvas.bind('<Right>',self.bouger_plateforme)
            
         
-       
-    #getteurs des coordonnées, largeur et hauteur de la plateforme
+    """
+    getteurs des coordonnées, largeur et hauteur de la plateforme
+    """
     def getx(self):
         return self.__x
     def gety(self):
@@ -42,16 +44,24 @@ class plateforme:
         return self.__hauteur
     def getpas(self):
         return self.__pas
+ 
     
     def changer_pas(self,nvl_valeur):
+        """""
+        entrée: nvl_valeur (int)
+        sortie: rien
+        remplace le pas, par la valeur: nvl_valeur
+        """""
         self.__pas = nvl_valeur
     
     
-    """
-    but: fonction qui fait bouger la plateforme
-    Entrée: event (touche que l'utilisateur presse, dans ce cas fleche droite ou gauche)
-    """
+    
     def bouger_plateforme(self,event):
+
+        """
+        but: fonction qui fait bouger la plateforme
+        Entrée: event (touche que l'utilisateur presse, dans ce cas fleche droite ou gauche)
+        """
         touche=event.keysym
 
         #conditions pour que la plateforme ne sors pas du canvas

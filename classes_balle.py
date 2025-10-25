@@ -23,8 +23,6 @@ Sommaire de fonctions:
  mouvement
 """
 
-
-
 class balle:
     """
      constructeur de la classe balle
@@ -37,12 +35,14 @@ class balle:
               angle: angle de depart de la balle (en radian)
      Sorties: aucune
     """
-    def __init__(self,canvas,x,y,rayon,vitesse,fenetre,couleur,angle,liste_briques,difficulte):
+    def __init__(self,canvas,x,y,rayon,vitesse,fenetre,couleur,angle,liste_briques,difficulte,plateforme,Bonus):
 
         self.__liste_briques=liste_briques
         self.__fenetre=fenetre
         self.__canvas=canvas
         self.__difficulte=difficulte
+        self.__plateforme=plateforme
+        self.__Bonus=Bonus
         
         self.__x=x
         self.__y=y
@@ -57,27 +57,29 @@ class balle:
         self.__couleur=couleur
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
 
-    # but: changer la vitesse de la balle, en changeant les composantes dx et dy
-    # Entrées: nouvelle_vitesse (entier)
-    # Sorties: aucune
+
     def changer_vitesse(self,nouvelle_vitesse):
+        """"    
+        # but: changer la vitesse de la balle, en changeant les composantes dx et dy
+        # Entrées: nouvelle_vitesse (entier)
+        # Sorties: aucune
+        """
         self.__dx = nouvelle_vitesse*cos(self.__angle)
         self.__dy = nouvelle_vitesse*sin(self.__angle)
 
-    #getteur de difficulté
+    #getteurs
     def get_difficulte(self):
-        return(self.__difficulte)
-    
+        return(self.__difficulte)  
     def get_vitesse(self):
         return(self.__vitesse)
 
         
     def detruire(self):
         """
-         but: detruire la balle du canvas
-    Entrées: aucune
-      Sorties: aucune 
-    """
+        but: detruire la balle du canvas
+        Entrées: aucune
+        Sorties: aucune 
+        """
       
         self.__canvas.delete(self.__boullee)
 
@@ -93,73 +95,95 @@ class balle:
     
     def rebond_horizontal(self):
         """
-        # but: faire rebondir la balle horizontalement
+    # but: faire rebondir la balle horizontalement
     # Entrées: aucune
     # Sorties: aucune
     """
         self.__dx=-self.__dx
 
-    def liste_briques(self):
-        dico_briques = {0: list(range(8)),1: list(range(8)),2: list(range(8)),3:list(range(8))}
-        liste_br = []
 
+    def liste_briques(self):
+        """""
+        but: créer une liste de briques adaptés à la fenetre du jeu, en ajoutan de facon aléatoire des briques
+        spéciaux
+        entrées: rien
+        sortie: liste de briques à insérer dans la classe balle
+        """
+        num_colonnes = 8
+        dico_briques = {0: list(range(num_colonnes)),1: list(range(num_colonnes)),2: list(range(num_colonnes)),3:list(range(num_colonnes))}
+        liste_br = []
         briques_speciaux=[]
+
         for l in range(5+self.__difficulte):
+            #au début on choisit de mettre cinq briques spéciaux
+            #avec cette boucle on a leurs coordonnées de facon aléatoire, et sans répeter entre elles
             ligne_aleatoire = randint(0,3) 
             colonne_aleatoire = randint(0,(len(dico_briques[ligne_aleatoire])-1))
-
             
-            briques_speciaux.append([ligne_aleatoire,dico_briques[ligne_aleatoire][colonne_aleatoire]])
 
+            #coordonées (ligne,colonne) stockées dans la liste briques spéciaux
+            briques_speciaux.append([ligne_aleatoire,dico_briques[ligne_aleatoire][colonne_aleatoire]])
+            
+            #on pop, pour ne pas répeter la colonne 
             dico_briques[ligne_aleatoire].pop(colonne_aleatoire)
         
         
 
         # on crée 4 lignes et 8 colonnes de briques 
         for j in range (4):
-            for i in range (8):
+            for i in range (num_colonnes):
                     largeur = 90
                     hauteur = 40
                     x = 9 + largeur + i*(9+largeur)
                     y = 10 + 50*j
                     
-                    brique=Brique(self.__zone_jeu,x,y,largeur,hauteur)
+                    brique=Brique(self.__canvas,x,y,largeur,hauteur)
                     liste_br.append(brique)
 
         
+        
         for l,coords in enumerate(briques_speciaux):
             
+            #on choisit un brique parmi les 4 briques spéciaux
             quel_brique = l%4
+
             largeur=90
             hauteur=40
             x = 9 + largeur + (coords[1])*(9+largeur)
-            y = 10 + 50*coords[0]  
-            index_liste = coords[0] * 8 + (coords[1])
+            y = 10 + 50*coords[0]
+
+            #comme la liste_briques a une seule dimension, alors on transforme les coordonées de la liste de 
+            #briques spéciaux (qui a 2 dimensions) en un index de une dimension qui correspond.   
+            index_liste = coords[0]*num_colonnes + (coords[1])
+            #on detruit le brique normal qui était a cétte cordonné
             liste_br[index_liste].detruire()
 
+            #on le remplace par le brique spécial
             if quel_brique==0:
-                liste_br[index_liste]=Brique_2vies(self.__zone_jeu,x,y,largeur,hauteur)
+                liste_br[index_liste]=Brique_2vies(self.__canvas,x,y,largeur,hauteur)
 
             elif quel_brique==1:
-                liste_br[index_liste]=Brique_indestructible(self.__zone_jeu,x,y,largeur,hauteur)
+                liste_br[index_liste]=Brique_indestructible(self.__canvas,x,y,largeur,hauteur)
             
             elif quel_brique==2:
-                liste_br[index_liste]=Brique_rapide(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+                liste_br[index_liste]=Brique_rapide(self.__canvas,x,y,largeur,hauteur,self.__fenetre,self.__plateforme,self.__Bonus)
 
             elif quel_brique==3:
-                liste_br[index_liste]=Brique_lent(self.__zone_jeu,x,y,largeur,hauteur,self.__fenetre,self.__plateforme)
+                liste_br[index_liste]=Brique_lent(self.__canvas,x,y,largeur,hauteur,self.__fenetre,self.__plateforme,self.__Bonus)
          
         return liste_br
-
 
   
     def colision_balle_brique(self, brique,score):
         """
-          but: detecter la colision entre la balle et une brique, en detruisant la brique et ajoutant un point
-     Entrées: brique (objet de la classe Brique)
-     Sorties: aucune
-        #prédire la position si la balle va vite
+        but: detecter la colision entre la balle et une brique, en detruisant la brique et ajoutant un point
+        Entrées: brique (objet de la classe Brique)
+                 score (objet de la classe score)
+        Sorties: aucune
+        
         """
+
+        #prédire la position si la balle va vite
         if abs(self.__dx)<=5:
             x_balle = self.__x
             y_balle = self.__y
@@ -226,9 +250,9 @@ class balle:
    
     def collision_plateforme(self,plateforme):
         """
-         but: gérer la colision avec la plateforme, en utilisant le principe de Descartes
-    Entrée: plateforme (rectangle dans un Canvas)
-    Sortie : Rien
+        but: gérer la colision avec la plateforme, en utilisant le principe de Descartes
+        Entrée: plateforme (classe plateforme)
+        Sortie : Rien
           """
          #prediction de la position si la balle va vite  
         if abs(self.__dx)<=5:
@@ -267,13 +291,12 @@ class balle:
             # Ajuste légèrement la position pour éviter que la balle rébondisse vers le bas immédiatement
             self.__y = y_plateforme - self.__rayon - 1
     
-
    
     def suivre_plateforme(self,plateforme):
         """
          but: fonction qui fait que la balle reste sur la plateforme au début du jeu
-    Entrée: plateforme
-    sortie: Rien
+        Entrée: plateforme
+        sortie: Rien
             """
         x_plat = plateforme.getx()
         y_plat = plateforme.gety()
@@ -288,20 +311,30 @@ class balle:
         if self.__dx==0 and self.__dy==0:
             self.__canvas.coords(self.__boullee,X,Y,X+2*self.__rayon,Y+2*self.__rayon)
             self.__fenetre.after(10,self.suivre_plateforme,plateforme)
+            return True
         else:
-            return
+            return 
             
-    #but: mettre a jour les coordonés de la balle dans le programme principal pour initialiser le jeu
-    #entrée: rien
-    #sortie : rien 
+    
     def mettre_a_jour_position_depuis_canvas(self):
+        """"
+        but: mettre a jour les coordonés de la balle dans le programme principal pour initialiser le jeu
+        entrée: rien
+        sortie : rien 
+        """
         coords = self.__canvas.coords(self.__boullee)  # (x1, y1, x2, y2)
         self.__x = (coords[0] + coords[2]) / 2 # donne la coordonée x du centre de la boulle
         self.__y = (coords[1] + coords[3]) / 2 # donne la coordonnée y du centre de la boulle
 
-    #but: gérer le mouvement de la balle 
-    #entrées: 
+     
     def mouvement(self,plateforme,vies,score):
+        """""
+        but: gérer le mouvement de la balle, le score et les vies 
+        #entrées: plateforme (classe plateforme)
+                  vies       (classe vies)
+                  score       (classe score)
+        sorties:rien
+        """""
 
         #rebond avec la paroi droite du canvas
         if  self.__x+self.__dx+self.__rayon > 1000:
@@ -349,10 +382,11 @@ class balle:
             self.changer_vitesse(0)
             self.suivre_plateforme(plateforme)
             self.__difficulte += 1
+            
             for brique in self.__liste_briques:
-                brique.detruire()
-            self.__liste_briques = self.liste_briques()
-            score.ajouter_niveau()
+                brique.detruire()#pour les briques indestructibles
+            self.__liste_briques = self.liste_briques()#créer des nouveaux briques
+            score.ajouter_niveau()#ajouter un diamond
             return 
         
          
@@ -367,7 +401,7 @@ class balle:
         self.__x+=self.__dx
         self.__y+=self.__dy
 
-        #met a jour le canvas avec les nouvelles coordonnées et relance la fonction mouvement chaque 10 ms
+        #met a jour la fenetre avec les nouvelles coordonnées et relance la fonction mouvement chaque 10 ms
         self.__canvas.coords(self.__boullee,self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon)
         self.__fenetre.after(10, self.mouvement,plateforme,vies,score)
 

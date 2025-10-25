@@ -9,11 +9,15 @@ Le projet est crée en Programmation Orientée Objet. Il est crée avec un fichi
 
 ## 🎯 Règles du jeu
 
-- Le joueur deplace une raquette en bas de l’écran et doit renvoyer la balle pour détruire toutes les briques.  
-- Chaque fois que toutes les briques seront detruite un diamant 💎 sera gagné et la partie est gagnée 🎉..  
+- Le joueur deplace une raquette en bas de l’écran et doit renvoyer la balle pour détruire toutes les briques.
+- 8 colonnes et 3 lignes de briques se generent dont 5 briques spéciaux repartis de facon aléatoire
+- 4 types de briques spéciaux: brique avec 2 vies, birque indestructible...   
+- Chaque fois que toutes les briques seront detruite un diamant 💎 sera gagné et le niveaux est pasé 🎉.. 
+- Les briques se réinitialisent, mais la vitesse de la balle et le nombre de briques spéciaux augmentent pour le    prochaine niveau 
 - Si la balle tombe en bas de la fenetre🪟, le joueur perd une vie ❤️.  
 - Si le joueur perd toutes ses vies, la partie est terminée 💀.  
-- Certains éléments visuels (🐢 Tortue, 🐇 Lapin) provenant de certaines briques peuvent apporter des **bonus** ou **malus** au joueur.  
+- Certains éléments visuels (🐢 Tortue, 🐇 Lapin) provenant de certaines briques peuvent apporter des **bonus** ou **malus** au joueur.
+  
 
 
 
@@ -24,8 +28,10 @@ Le projet est crée en Programmation Orientée Objet. Il est crée avec un fichi
 
 Des differentes structures de données sont utilisées:
 
-- **Pile de vies (Stack)** → implémentée dans `Classe_vies.py` => à chaque defaite on enlève un coeur ❤️. 
-- **Pile de score (Stack)** → dans `Classe_scores.py` => à chaque fois que toutes les briques sont detruites, un diamant 💎 est gagné. 
+- **Pile de vies** → implémentée dans `Classe_vies.py` => à chaque defaite on enlève un coeur ❤️. 
+- **Pile de score** → dans `Classe_scores.py` => à chaque fois que toutes les briques sont detruites, un diamant 💎 est gagné.
+- **liste de briques** → dans `Classe_balle` et `jeu.py` 
+- **file de bonus** → dans `Classe_bonus.py`
   
 
 
@@ -34,9 +40,9 @@ Des differentes structures de données sont utilisées:
 
 ## 🚀 Fonctionnalités principales
 
-- Mouvement realiste de la balle, rebonds sur les murs et la raquette suivant les lois d'optique de Descartes.  
+- Mouvement de la balle, rebonds sur les murs et la raquette suivant les lois d'optique de Descartes.  
 - Destruction des briques avec mise à jour du score 💎 lorsque toutes les briques sont detruites.     
-- Gestion dynamique des vies ❤️.     
+- Gestion des vies ❤️.     
 - Bouton **nouvelle partie / Rejouer** pour relancer une partie sans redémarrer le jeu.  
 - Interface graphique sous Tkinter.   
 - Ajout d’éléments visuels : **tortue**🐢 et **lapin** 🐇 sur le canvas.   

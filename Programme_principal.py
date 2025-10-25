@@ -1,18 +1,20 @@
 #Jeronimo gomez et Daoud Hechaichi
 #17/10/2025
 #but: créer le jeu du casse briques en tkinter 
-#à améliorer: rajouter des niveaux de difficulté
+#à améliorer: rajouter la possibilité de changer les toucher, et jouer ave la souris
 
 
 from tkinter import Tk
 from jeu import jeu
 
-# fonction pour centrer la fenetre dans l'ecran
-# Entrées: fenetre, longueur de la fenetre(enntier), largeur de la fenetre(entier)
-# Sorties: chaine de caracteres avec la geometrie de la fenetre, a inserer dans fenetre.geometry()
+
 
 def centrer_fenetre(fenetre, longueur_fenetre, largeur_fenetre):
-    
+    """
+    # fonction pour centrer la fenetre dans l'ecran
+    # Entrées: fenetre, longueur de la fenetre(enntier), largeur de la fenetre(entier)
+    # Sorties: chaine de caracteres avec la geometrie de la fenetre, a inserer dans fenetre.geometry()
+    """   
     longueur_ecran= fenetre.winfo_screenwidth() #recupere la largeur de l'ecran
     largeur_ecran= fenetre.winfo_screenheight() #recupere la hauteur de l'ecran
 
@@ -29,7 +31,7 @@ MaFenetre.title("Jeu du casse-briques")
 MaFenetre.geometry(centrer_fenetre(MaFenetre, 1000,600))
 MaFenetre.config(bg="gray20")
 
-# Canvas et Frames du jeu
+#jeu: canvas et frames
 jeu(MaFenetre)
 
 # Actualisation de la fenetre
