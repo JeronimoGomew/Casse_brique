@@ -5,7 +5,7 @@
 
 Un jeu de casse-brique réalisé en **Python** avec **Matplotlib**, **PIL**, **Tkinter** et **Random** développé par **Daoud Hechaïchi** et **Jeronimo Gomez** en classe de  **3ETI, CPE Lyon**.  
 
-Le projet est crée en Programmation Orientée Objet. Il est crée avec un fichier par classe et une interface graphique complète avec des éléments visuels comme une tortue 🐢 et un lapin 🐇 animés pour des bonus... ou malus 😈.
+Le projet est crée en Programmation Orientée Objet. Il est crée avec un fichier par classe et une interface graphique complète avec des éléments visuels comme une tortue 🐢 et un lapin 🐇 animés pour des bonus... ou malus 😈(repertoire git: https://github.com/JeronimoGomew/Casse_brique)
 
 ## 🎯 Règles du jeu
 
