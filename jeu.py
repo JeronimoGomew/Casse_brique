@@ -248,7 +248,11 @@ class jeu :
             if self.__ballejeu.suivre_plateforme(self.__plateforme):
                 difficulté = self.__ballejeu.get_difficulte()
                 self.__ballejeu.mettre_a_jour_position_depuis_canvas()
+
+    # la balle démarre seulement si elle est immobile
+            if abs(self.__ballejeu._balle__dx) < 1e-5 and abs(self.__ballejeu._balle__dy) < 1e-5:
                 self.__ballejeu.changer_vitesse(5 + difficulté)
+
                 self.__ballejeu.mouvement(self.__plateforme, self.__gestion_vies, self.__gestion_score)
             #definir une vitesse qui dépend de combien de niveaux l'utilisateur a passé
             self.__ballejeu.mouvement(self.__plateforme,self.__gestion_vies,self.__gestion_score)

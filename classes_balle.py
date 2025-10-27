@@ -48,7 +48,7 @@ class balle:
         self.__y=y
         self.__rayon=rayon
 
-        self.__angle=angle
+        self.__angle = radians(angle)
         self.__vitesse=vitesse #vitesse initiale
         
         self.__dx=self.__vitesse*cos(self.__angle) #composante horizontale de la vitesse
@@ -58,14 +58,12 @@ class balle:
         self.__boullee=self.__canvas.create_oval(self.__x-self.__rayon,self.__y-self.__rayon,self.__x+self.__rayon,self.__y+self.__rayon,fill=self.__couleur)
 
 
-    def changer_vitesse(self,nouvelle_vitesse):
-        """"    
-        # but: changer la vitesse de la balle, en changeant les composantes dx et dy
-        # Entrées: nouvelle_vitesse (entier)
-        # Sorties: aucune
-        """
-        self.__dx = nouvelle_vitesse*cos(self.__angle)
-        self.__dy = nouvelle_vitesse*sin(self.__angle)
+
+
+    def changer_vitesse(self, nouvelle_vitesse):
+        self.__vitesse = nouvelle_vitesse
+        self.__dx = self.__vitesse * cos(self.__angle)
+        self.__dy = self.__vitesse * sin(self.__angle)
 
     #getteurs
     def get_difficulte(self):
