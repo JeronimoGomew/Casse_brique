@@ -58,7 +58,7 @@ Plusieurs raccourcis clavier ont été ajoutés pour pouvoir jouer sans souris :
 | **Espace** ⎵ | Lance la balle (équivalent du bouton *Démarrer/Rejouer*) |
 | **R** 🔁 | Redémarre une nouvelle partie |
 | **Échap** ⎋ | Quitte le jeu et ferme la fenêtre Tkinter |
-
+| **p**  | Menu pause |
  
 
 ## 🧠 Structure du projet
