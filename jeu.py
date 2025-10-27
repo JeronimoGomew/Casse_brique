@@ -93,6 +93,8 @@ class jeu :
 
         self.initialiser()#initalise tout à nouveau 
 
+
+    '''creation du menu pause'''
     def pause_menu(self):
         # Si le menu existe déjà -> on le ferme et on relance la partie
         if hasattr(self, "__menu_pause") and self.__menu_pause.winfo_exists():
@@ -167,8 +169,8 @@ class jeu :
         briques_speciaux=[]
 
         for l in range(5):
-            #au début on choisit de mettre cinq briques spéciaux
-            #avec cette boucle on a leurs coordonnées de facon aléatoire, et sans répeter entre elles
+            '''#au début on choisit de mettre cinq briques spéciaux
+            #avec cette boucle on a leurs coordonnées de facon aléatoire, et sans répeter entre elles'''
             ligne_aleatoire = randint(0,3) 
             colonne_aleatoire = randint(0,(len(dico_briques[ligne_aleatoire])-1))
             
