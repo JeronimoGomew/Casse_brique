@@ -106,7 +106,7 @@ class jeu :
                 pass
             return
 
-        # "Pause" soft : on baisse la vitesse à 0 et on mémorise l’ancienne
+        # "Pause" 
         try:
             self.__vit_before_pause = getattr(self, "__vit_before_pause", 6)
             if hasattr(self.__ballejeu, "get_vitesse"):
@@ -116,7 +116,7 @@ class jeu :
         except Exception:
             pass
 
-        # Petite fenêtre de pause (UNE SEULE FOIS)
+        # Petite fenêtre de pause 
         self.__menu_pause = Toplevel(self.__fenetre)
         self.__menu_pause.title("Pause")
         self.__menu_pause.geometry("260x160+520+320")
