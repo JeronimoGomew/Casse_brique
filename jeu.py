@@ -10,7 +10,7 @@ from Brique import Brique, Brique_2vies, Brique_indestructible, Brique_rapide,Br
 from Classe_scores import Score
 from tkinter import Frame, Canvas,Button
 from Classe_bonus import Bonus
-
+from tkinter import Frame, Canvas, Button, Toplevel, Label
 class jeu :
     """""
     # Constructeur classe jeu
@@ -52,7 +52,11 @@ class jeu :
         # liaison de la touche espace pour lancer la balle
         self.__fenetre.bind("<space>", lambda event: self.Lancer())
 
-        
+        # Bouton Stop / Pause + raccourci clavier
+        Bouton_Stop = Button(self.__FrameBottom, text="⏸ Pause", command=self.pause_menu)
+        Bouton_Stop.pack(side="left", pady=10, padx=10)
+        self.__fenetre.bind("<p>", lambda event: self.pause_menu())
+        self.__fenetre.bind("<P>", lambda event: self.pause_menu())
 
 
         #initialiser le jeu
@@ -89,7 +93,67 @@ class jeu :
 
         self.initialiser()#initalise tout à nouveau 
 
-  
+    def pause_menu(self):
+        # Si le menu existe déjà -> on le ferme et on relance la partie
+        if hasattr(self, "__menu_pause") and self.__menu_pause.winfo_exists():
+            try:
+                self.__menu_pause.destroy()
+            except Exception:
+                pass
+            try:
+                self.Lancer()
+            except Exception:
+                pass
+            return
+
+        # "Pause" soft : on baisse la vitesse à 0 et on mémorise l’ancienne
+        try:
+            self.__vit_before_pause = getattr(self, "__vit_before_pause", 6)
+            if hasattr(self.__ballejeu, "get_vitesse"):
+                self.__vit_before_pause = self.__ballejeu.get_vitesse()
+            if hasattr(self.__ballejeu, "changer_vitesse"):
+                self.__ballejeu.changer_vitesse(0)
+        except Exception:
+            pass
+
+        # Petite fenêtre de pause (UNE SEULE FOIS)
+        self.__menu_pause = Toplevel(self.__fenetre)
+        self.__menu_pause.title("Pause")
+        self.__menu_pause.geometry("260x160+520+320")
+        self.__menu_pause.configure(bg="gray20")
+        self.__menu_pause.resizable(False, False)
+
+        Label(
+            self.__menu_pause,
+            text="⏸️  Partie en pause",
+            bg="gray20",
+            fg="white",
+            font=("Arial", 14, "bold")
+        ).pack(pady=14)
+
+        # Reprendre
+        def reprendre():
+            try:
+                if hasattr(self.__ballejeu, "changer_vitesse"):
+                    self.__ballejeu.changer_vitesse(self.__vit_before_pause)
+            except Exception:
+                pass
+            try:
+                self.__menu_pause.destroy()
+            except Exception:
+                pass
+            # relance du mouvement
+            self.Lancer()
+
+        Button(self.__menu_pause, text="▶️ Reprendre", width=16, command=reprendre).pack(pady=4)
+
+        # Recommencer
+        Button(
+            self.__menu_pause, text="🔁 Recommencer", width=16,
+            command=lambda: (self.__menu_pause.destroy(), self.reinitier())
+        ).pack(pady=4)
+
+
     def liste_briques(self):
         """""
         but: créer une liste de briques adaptés à la fenetre du jeu, en ajoutan de facon aléatoire des briques
@@ -179,6 +243,11 @@ class jeu :
             #recupere les coordonnées actuelles de la balle, sinon, le programme considère que se sont celles d'initialisation
             #de la classe quand on change sa vitesse
             self.__ballejeu.changer_vitesse(5+difficulté)
+            if self.__ballejeu.suivre_plateforme(self.__plateforme):
+                difficulté = self.__ballejeu.get_difficulte()
+                self.__ballejeu.mettre_a_jour_position_depuis_canvas()
+                self.__ballejeu.changer_vitesse(5 + difficulté)
+                self.__ballejeu.mouvement(self.__plateforme, self.__gestion_vies, self.__gestion_score)
             #definir une vitesse qui dépend de combien de niveaux l'utilisateur a passé
             self.__ballejeu.mouvement(self.__plateforme,self.__gestion_vies,self.__gestion_score)
             #lancer le mouvement
