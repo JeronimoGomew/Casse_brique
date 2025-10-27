@@ -8,7 +8,6 @@ from classes_balle import balle
 from Classe_vies import Vies
 from Brique import Brique, Brique_2vies, Brique_indestructible, Brique_rapide,Brique_lent
 from Classe_scores import Score
-from tkinter import Frame, Canvas,Button
 from Classe_bonus import Bonus
 from tkinter import Frame, Canvas, Button, Toplevel, Label
 class jeu :
@@ -96,7 +95,7 @@ class jeu :
 
     '''creation du menu pause'''
     def pause_menu(self):
-        # Si le menu existe déjà -> on le ferme et on relance la partie
+        
         if hasattr(self, "__menu_pause") and self.__menu_pause.winfo_exists():
             try:
                 self.__menu_pause.destroy()
@@ -118,7 +117,7 @@ class jeu :
         except Exception:
             pass
 
-        # Petite fenêtre de pause 
+        #  fenêtre de pause 
         self.__menu_pause = Toplevel(self.__fenetre)
         self.__menu_pause.title("Pause")
         self.__menu_pause.geometry("260x160+520+320")
