@@ -7,7 +7,7 @@ from tkinter import StringVar,Label
 class Vies:
     """
     partie qui gerent  les vies du joueur sous forme d'une pile.
-    Chaque vie est représentée par un cœur (❤️) et la pile est mise à jour automatiquement.
+    les vies snt representées par des coeurs en emoji (❤️) et la pile est mise à jour automatiquement.
     """
 
     def __init__(self, frame_top, nb_vies, couleur_texte="white", bg="gray15"):
@@ -15,12 +15,12 @@ class Vies:
         Initialise la pile de vies avec un nombre donné,ici 3,  et configure le label d'affichage
 
         
-        param nb_vies: Nombre initial de vies
-        param couleur_texte: Couleur du texte du label
-        param bg: Couleur de fond du label
+        parametre nb_vies: Nombre initial de vies
+        parametre couleur_texte: Couleur du texte du label
+        parametre bg: Couleur de fond du label
         """
         self.nb_vies_initial = nb_vies
-        self.pile_vies = ["❤️" for _ in range(nb_vies)]  # La pile de vies, chaque vie est un cœur
+        self.pile_vies = ["❤️" for _ in range(nb_vies)]  # pile de vies qui sont des coeurs emoji
         self.var_vies = StringVar()
         self.var_vies.set(f"Vies : {' '.join(self.pile_vies)}")
 
